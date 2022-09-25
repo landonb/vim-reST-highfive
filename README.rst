@@ -374,13 +374,13 @@ Clone the project to the desired path:
 
 .. code-block:: bash
 
-    git clone https://github.com/landonb/vim-reSTfold.git
+    git clone https://github.com/landonb/vim-reST-highfive.git
 
 If you installed to the optional path, tell Vim to load the package:
 
 .. code-block:: vim
 
-   :packadd! vim-reSTfold
+   :packadd! vim-reST-highfive
 
 Just once, tell Vim to build the online help:
 
@@ -392,5 +392,5 @@ Then whenever you want to reference the help from Vim, run:
 
 .. code-block:: vim
 
-   :help vim-reSTfold
+   :help vim-reST-highfive
 
