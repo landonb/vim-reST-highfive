@@ -2,13 +2,13 @@
 
 reST Document FIVER Highlighting~
 
-RESTRUCTUREDTEXT FIVER HIGHLIGHTER	*vim-reST-highfive*
+RESTRUCTUREDTEXT FIVER HIGHLIGHTER		*vim-reST-highfive*
 
-1. About This Plugin			|vim-rsthf-about|
-2. FIVER Highlighting			|vim-rsthf-fiverhighlighting|
+1. About This Plugin				|vim-rsthf-about|
+2. How FIVER Highlighting Works			|vim-rsthf-fiverhighlighting|
 
 ==============================================================================
-1. About This Plugin			*vim-rsthf-about*
+1. About This Plugin				*vim-rsthf-about*
 
 This plugin adds FIVER (uppercase five-letter word) highlighting to
 your reST documents, to supercharge your note-taking and knowledge
@@ -17,7 +17,7 @@ management using reST files in Vim.
 Project page: https://github.com/landonb/vim-reST-highfive#🖐
 
 ==============================================================================
-2. FIVER Highlighting			*vim-rsthf-fiverhighlighting*
+2. How FIVER Highlighting Works			*vim-rsthf-fiverhighlighting*
 
 What are FIVER action words?
 ----------------------------
