@@ -259,3 +259,11 @@ Then whenever you want to reference the help from Vim, run:
 
    :help vim-reST-highfive
 
+License
+=======
+
+Copyright (c) Landon Bouma. This work is distributed
+wholly under CC0 and dedicated to the Public Domain.
+
+https://creativecommons.org/publicdomain/zero/1.0/
+
