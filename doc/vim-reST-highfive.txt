@@ -1,207 +1,153 @@
-*vim-reSTfold.txt*	For Vim version 7.4.	Last change: 2018 Dec 07
+*vim-reST-highfive.txt*	For Vim version 7.4.	Last change: 2022 Sep 24
 
-Dubs Vim -- reST Document Folding~
+reST Document FIVER Highlighting~
 
-FILETYPE-SPECIFIC MESS			*vim-reSTfold*
+RESTRUCTUREDTEXT FIVER HIGHLIGHTER	*vim-reST-highfive*
 
-1. About This Plugin			|vim-rstfd-about|
-2. reST Section Syntax			|vim-rstfd-sectioning|
-3. Calculate reST Folds			|vim-rstfd-calculating|
-4. Transpose reST Folds			|vim-rstfd-transposing|
-5. Tips 'n Tricks			|vim-rstfd-tipsntricks|
+1. About This Plugin			|vim-rsthf-about|
+2. FIVER Highlighting			|vim-rsthf-fiverhighlighting|
 
 ==============================================================================
-1. About This Plugin			*vim-rstfd-about*
+1. About This Plugin			*vim-rsthf-about*
 
-This plugin improves upon and fixes performance issues with Vim's
-built-in reST syntax highlighting and document section folding.
+This plugin adds FIVER (uppercase five-letter word) highlighting to
+your reST documents, to supercharge your note-taking and knowledge
+management using reST files in Vim.
 
-Project page: https://github.com/landonb/vim-reSTfold#🙏
-
-==============================================================================
-2. reST Section Syntax			*vim-rstfd-sectioning*
-
-reST Fold Delimiters
---------------------
-
-The reST language is flexible when it comes to delimiting sections,
-allowing you to choose generally any ASCII non-alphanum as a delimiter,
-and then inferring the level of each section by the order in which the
-section delimiters are introduced in the document. You can also choose
-to use just an underscored delimiter, or you can add an overscore, too.
-
-For instance, both of the following documents will render the same:
-
-Document 1:
-
-  `Level 1 Heading`
-  `###############`
-
-  `===============`
-  `Level 2 Heading`
-  `===============`
-
-and Document 2:
-
-  `===============`
-  `Level 1 Heading`
-  `===============`
-
-  `Level 2 Heading`
-  `---------------`
-
-Obviously, this flexibility makes any parser more complex to write,
-and it might noticeably impact real-time application responsiveness.
-
-Accordingly, the `vim-reSTfold` plugin imposes strict rules for
-section headers used for folding:
-
-- Only double-bordered reST sections will be folded.
-
-  E.g., this header with both an overscore and an underscore will be folded:
-
-    `###########################`
-    `This Section Will Be Folded`
-    `###########################`
-
-  but this header, with simply an underscore, will be ignored by the folding engine:
-
-    `This Section Will Not Be Folded`
-    `###############################`
-  
-- Fold levels are assigned in a specific, static order.
-
-  That is, as you use the command `zr` to collapse one level of folds,
-  or use `zm` to open a level of folds, or `za` to toggle the current
-  fold, the sections levels are determined based on the delimiter used:
-
-  - Level 1: `@`
-
-  - Level 2: `#`
-
-  - Level 3: `=`
-
-  - Level 4: `-`
-
-  For instance, this document has two Level 2 sections:
-
-    `@@@@@@@@@@@@@@@@@@@@@@@`
-    `Document Section Header`
-    `@@@@@@@@@@@@@@@@@@@@@@@`
-
-    `#####################`
-    `One Top-Level Section`
-    `#####################`
-
-    `===============`
-    `Level 3 Section`
-    `===============`
-
-    `#########################`
-    `Another Top-Level Section`
-    `#########################`
-
-    `=======================`
-    `Another Level 3 Section`
-    `=======================`
-
-    `A Level 3 reST section, but ignored by folder`
-    `=============================================`
-
-    `------------------------`
-    `Foldable Level 4 Section`
-    `------------------------`
+Project page: https://github.com/landonb/vim-reST-highfive#🖐
 
 ==============================================================================
-3. Calculate reST Folds			*vim-rstfd-calculating*
+2. FIVER Highlighting			*vim-rsthf-fiverhighlighting*
 
-Manually Calculating reST Folds [`<F5>`]
-----------------------------------------
+What are FIVER action words?
+----------------------------
 
-By default, Vim enables reST folding.
+In lieu of bug tracking or issue management software, you can use
+reStructuredText files in Vim to manage your notes and "backlog"
+items.
 
-But this can cause performance issues, e.g., every time you insert or
-remove a character from a buffer, Vim has to recalculate folds.
+The author of this plugin has been doing so for over a decade, and
+over the course of those years, I started using five-letter action
+words to highlight different **types** of notes. This includes work
+to be done, work completed, an interesting note I want to highlight,
+etc.
 
-To prevent performance issues, the user must explicitly generate folds.
+For example, you might think of something you want to do, and then
+you could record it in your notes with the appropriate FIVER word,
+such as using "FTREQ" to denote new work that you'd like to complete: >
 
-Press `<F5>` to generate (and collapse all) folds.
+  FTREQ: Write the `reST-highfive` help doc.
+<
+Or if you found an issue that you wanted to fix, you could use "FIXME": >
 
-==============================================================================
-4. Transpose reST Folds			*vim-rstfd-transposing*
+  FIXME: The 'reST-highfive` pattern should exclude "COVID".
+<
+Other uses include documenting interesting information, such as using
+"SAVVY" to remind yourself of some trick you learned: >
 
-Swap reST Sections (Transpose Folds) [`<C-Up>` and `<C-Down>`]
---------------------------------------------------------------
+  SAVVY: Search Gmail by date: `after:YYYY/MM/DD before:YYYY/MM/DD`
+<
+Or you could use "REFER" to reference information outside your notes
+(and maybe you've got the *dubs_web_hatch* plugin installed, so you
+could type <gW> to open the URL under the cursor), e.g.,: >
 
-In normal mode, with the cursor over a folded reST section,
-press `<C-Up>` to swap the fold under the cursor with the
-fold under the line above the cursor; press `<C-Down>` to
-swap with the fold on the line following the current fold.
+  REFER: Anduril 2 Manual:
+    http://toykeeper.net/torches/fsm/anduril2/anduril-manual.txt
+<
+The uses are quite endlessly, and the vocabulary is essentially
+yours to create.
 
-==============================================================================
-5. Tips 'n Tricks			*vim-rstfd-tipsntricks*
+How to highlight FIVERs
+-----------------------
 
-Fold Title Trickery
--------------------
+This plugin automatically highlights any FIVER word (a five-letter
+uppercase word) that's followed by a colon or a forward slash.
 
-The reST section title that's sandwiched between the section delimiter
-lines is used for the folded view title.
+E.g., just type "FIVER" followed by a colon, and it'll be highlighted: >
 
-Because of this, you can design section titles that look good folded, too.
+  FIVER: The "FIVER" before the colon is highlighted.
+<
+Additionally, any FIVER followed by a forward slash is also highlighted
+(because the author dates their notes), e.g., >
 
-For instance, consider the following, unfolded document:
+  TRYME/2022-09-24 18:35: Try cooking Jackfruit Pulled "Pork".
+>
+Always-highlighted FIVERs
+-------------------------
 
-  `###########################################################`
-  `┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓`
-  `###########################################################`
+Some FIVERs are always highlighted when used in a document, regardless
+of being punctuated. The list includes:
 
-  `###########################################################`
-  `┣━━ // * TABLE_OF_CONTENTS * // ━━━━━━━━━━━━━━━━━━━━━━━━━━┨`
-  `###########################################################`
+  FIVER
+  LATER
+  MAYBE
+  SPIKE
+  LEARN
+  STUDY
+  WATCH
+  TRACK
+  AWAIT
+  ORDER
+  CHORE
+  AUDIT
+  CHECK
+  REPLY
+  TRYME
+  HRMMM
+  MEHHH
+  BONUS
+  OOOPS
 
-  `###########################################################`
-  `┃   ┏━━━━━━━━━━━━━┓                                       ┃`
-  `###########################################################`
+Using FIVERs to mark tasks completed
+------------------------------------
 
-  `###########################################################`
-  `┃   ┃ ☼ FOO BAR ☼ ┃                            🏄 🏄 🏄   ┃`
-  `###########################################################`
+When you're down with a task, you can change the FIVER to indicate that
+the task is completed.
 
-  `###########################################################`
-  `┃ ┏━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ┃`
-  `###########################################################`
+For instance, after completing a "FIXME" task, rename it "FIXED".
 
-  `###########################################################`
-  `┃ ┃ SECTION X: Blah blah blah                           ┃ ┃`
-  `###########################################################`
+This plugin will specially highlight such FIVERs using a strikethrough.
 
-  `###########################################################`
-  `┃ ┃ SECTION Y: Blasé blasé blasé                        ┃ ┃`
-  `###########################################################`
+E.g., if you completed the example task listed above, you could rewrite
+it: >
 
-  `###########################################################`
-  `┃ ┃ SECTION Z: Patati Patata                            ┃ ┃`
-  `###########################################################`
+  FIXED: The 'reST-highfive` pattern match should exclude "COVID".
+<
+and this plugin with highlight the "FIXED" word using a strikethrough.
 
-  `###########################################################`
-  `┃ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ┃`
-  `###########################################################`
+Which FIVER words signify completion
+------------------------------------
 
-  `###########################################################`
-  `┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛`
-  `###########################################################`
+Almost any five-letter uppercase word that ends in "D" will be highlighted
+with a strikethrough.
 
-Once folded (e.g., using `<F5>`), it'll look like this:
+This includes the following: >
 
-  `1  +-- ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ---- |  4 lines |--`
-  `5  +-- ┣━━ // * TABLE_OF_CONTENTS * // ━━━━━━━━━━━━━━━━━━━━━━━━━━┨ ---- |  4 lines |--`
-  `9  +-- ┃   ┏━━━━━━━━━━━━━┓                                       ┃ ---- |  4 lines |--`
-  `13 +-- ┃   ┃ ☼ FOO BAR ☼ ┃                            🏄 🏄 🏄   ┃ ---- |  4 lines |--`
-  `17 +-- ┃ ┏━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ┃ ---- |  4 lines |--`
-  `21 +-- ┃ ┃ SECTION X: Blah blah blah                           ┃ ┃ ---- |  4 lines |--`
-  `25 +-- ┃ ┃ SECTION Y: Blasé blasé blasé                        ┃ ┃ ---- |  4 lines |--`
-  `29 +-- ┃ ┃ SECTION Z: Patati Patata                            ┃ ┃ ---- |  4 lines |--`
-  `33 +-- ┃ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ┃ ---- |  4 lines |--`
-  `37 +-- ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ---- |  4 lines |--`
+  FIXED (when a "FIXME" is complete)
+  ORDRD (when you complete an "ORDER" item)
+  WAITD (after an "AWAIT" task is complete)
+<
+and anything else you can dream up.
+
+Note that some words that are not past tense words are specifically
+excluded, including "BUILD", "FOUND", and, of course, "COVID".
+
+This plugin also recognizes a few other special terms, including: >
+
+  SPOKE (the completed state for "SPIKE", I know, it's silly)
+  ANNUL (how you might cancel any task you choose not to complete)
+<
+Suggesting FIVERs
+-----------------
+
+The author is more than willing to entertain new FIVER words, or changes
+to the dictionary setup by this plugin. But note that how anyone chooses
+to use this plugin is probably very specific to their own tastes. So you
+might just want to fork the plugin and tweak the dictionary to your liking.
+
+But the author would still love to hear about how you use and how you've
+personalized this plugin! (Indeed, if anyone likes this plugin, please
+give the project a star, I'd love to know that other devs enjoy it as
+much as I do. =)
 
  vim:tw=78:ts=8:ft=help:norl:

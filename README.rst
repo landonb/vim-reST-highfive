@@ -1,18 +1,19 @@
-###############################################
-``vim-reSTfold`` |em_dash| reST Document Folder
-###############################################
+###########################################################################
+``vim-reST-highfive`` |em_dash| reST five-letter uppercase word highlighter
+###########################################################################
 
 .. |em_dash| unicode:: 0x2014 .. em dash
 
 About This Plugin
 =================
 
-This plugin adds advanced reST document section folding.
+This plugin adds FIVER (uppercase five-letter word) highlighting
+to your reST documents.
 
-Supercharge your notetaking and recordkeeping!
+Supercharge your notetaking and knowledge management practices!
 
-Install this plugin to make it easier to manage
-notes in Vim using reStructuredText markup.
+Install this plugin to make it easier to manage notes in Vim
+using reStructuredText markup.
 
 Why You Might Want to Use This Plugin
 =====================================
@@ -23,295 +24,176 @@ see how this plugin makes it easier to manage your notes.
 Consider the following document::
 
   @@@@@@@@@@@@@@
-  reSTfold Notes
+  My Vim Backlog
   @@@@@@@@@@@@@@
 
-  ####################################
-  FIXME: Update reSTfold plugin README
-  ####################################
+  FTREQ: Develop a Vim plugin to highlight five-letter uppercase words.
 
-  2021-07-12 21:39: Update reSTfold README with latest enhancements.
+  FIXME: Opening symlinks using netrw plugin causes save-file warning.
 
-  #######################################################
-  MAYBE: Publish Medium article to promote reSTfold usage
-  #######################################################
+  LEARN: Teach yourself the latest Vim 9 script language: `:h new-9`.
 
-  2021-07-13 12:04: Get some claps.
-  - Research what makes a good tech article.
-  - Devise a better example than this readme.
-  - Find a copy editor to review your work.
+Normally, only the header is highlighted in Vim (by the ``syntax/rst.vim``
+syntax file).
 
-  ######################
-  NOTES: Some more notes
-  ######################
+But this plugin will highlight each of the five-letter words that are
+preceded by a colon.
 
-  Foo bar baz bat.
+This is especially useful (at least to the author) when you've got a
+lot of notes in a file, and you want action items to stand out.
 
-This plugin lets you fold the reST headers, collapsing everything into
-essentially a high-level Table of Contents. You can then open individual
-sections to read or work on their contents.
+For instance, I might have a "FIXME" note followed by a few paragraphs
+of text, followed by another "FIXME", etc., and I want to be able to
+scroll down the document and quickly see each "FIXME".
 
-E.g., press ``<F5>`` to collapse all folds, and Vim will show::
+What are FIVER action words?
+============================
 
-   1 @@@@@@@@@@@@@@
-   2 reSTfold Notes
-   3 @@@@@@@@@@@@@@
-   4
-   5  ┌─ FIXME: Update reSTfold plugin README                     ──┤  6 ll. ├─
-  11  ├─ MAYBE: Publish Medium article to promote reSTfold usage  ──┤  8 ll. ├─
-  19  └─ NOTES: Some more notes                                   ──┤  6 ll. ├─
+In lieu of bug tracking or issue management software, you can use
+reStructuredText files in Vim to manage your notes and "backlog"
+items.
 
-You can then use the normal Vim fold commands to open and close folds.
+The author of this plugin has been doing so for over a decade, and
+over the course of those years, I started using five-letter action
+words to highlight different *types* of notes. This includes work
+to be done, work completed, an interesting note I want to highlight,
+etc.
 
-For example, position the cursor over a fold title and type ``za`` to open it.
+For example, you might think of something you want to do, and then
+you could record it in your notes with the appropriate FIVER word,
+such as using "FTREQ" to denote new work that you'd like to complete::
 
-Usage: Signify Fold Levels using Specific Punctuation
-=====================================================
+  FTREQ: Write the `reST-highfive` help doc.
 
-Generally, reST lets you choose any delimiters (ASCII punctuation)
-to use for the different heading levels, and the reST parser will
-infer the levels from their usage order within the document.
+Or if you found an issue that you wanted to fix, you could use "FIXME"::
 
-You indicate a heading by underlining with the same punctuation
-character. The reST specification also lets you add an overline.
+  FIXME: The 'reST-highfive` pattern should exclude "COVID".
 
-For instance, both of these documents render the same:
+Other uses include documenting interesting information, such as using
+"SAVVY" to remind yourself of some trick you learned::
 
-Document 1::
+  SAVVY: Search Gmail by date: `after:YYYY/MM/DD before:YYYY/MM/DD`
 
-  Level 1 Heading
-  ###############
+Or you could use "REFER" to reference information outside your notes
+(and maybe you've got the `dubs_web_hatch
+<https://github.com/landonb/dubs_web_hatch>`__ plugin installed, so you
+could type ``<gW>`` to open the URL under the cursor), e.g.,::
 
-  ===============
-  Level 2 Heading
-  ===============
+  REFER: Anduril 2 Manual:
+    http://toykeeper.net/torches/fsm/anduril2/anduril-manual.txt
 
-and Document 2::
+The uses are quite endlessly, and the vocabulary is essentially
+yours to create.
 
-  ===============
-  Level 1 Heading
-  ===============
+How to highlight FIVERs
+=======================
 
-  Level 2 Heading
-  ---------------
+This plugin automatically highlights any FIVER word (a five-letter
+uppercase word) that's followed by a colon or a forward slash.
 
-But this plugin is not as flexible.
+E.g., just type "FIVER" followed by a colon, and it'll be highlighted::
 
-To use ``vim-reSTfold``, you'll need to follow a few guidelines.
+  FIVER: The "FIVER" before the colon is highlighted.
 
-(These rules make the plugin less complex, and probably faster.)
+Additionally, any FIVER followed by a forward slash is also highlighted
+(because the author dates their notes), e.g.,::
 
-Rule #1: Only double-bordered headers will be folded
-----------------------------------------------------
+  TRYME/2022-09-24 18:35: Try cooking Jackfruit Pulled "Pork".
 
-- Use a double-bordered reST heading for sections you want folded.
+Always-highlighted FIVERs
+=========================
 
-- E.g., this header with both an overscore and an underscore will be folded::
+Some FIVERs are always highlighted when used in a document, regardless
+of being punctuated. The list includes::
 
-    ###########################
-    This Section Will Be Folded
-    ###########################
+  FIVER
+  LATER
+  MAYBE
+  SPIKE
+  LEARN
+  STUDY
+  WATCH
+  TRACK
+  AWAIT
+  ORDER
+  CHORE
+  AUDIT
+  CHECK
+  REPLY
+  TRYME
+  HRMMM
+  MEHHH
+  BONUS
+  OOOPS
 
-  but this header, with only an underscore, will not be folded::
+Using FIVERs to mark tasks completed
+====================================
 
-    This Section Will Not Be Folded
-    ###############################
+When you're down with a task, you can change the FIVER to indicate that
+the task is completed.
 
-**Use an underline and overline around the heading for each section you want folded.**
+For instance, after completing a "FIXME" task, rename it "FIXED".
 
-Rule #2: Use these 4 characters for your headings
--------------------------------------------------
+This plugin will specially highlight such FIVERs using a strikethrough.
 
-- Use the following characters for the heading levels indicated:
+E.g., if you completed the example task listed above, you could rewrite
+it::
 
-  - Level 1: ``@``
+  FIXED: The 'reST-highfive` pattern match should exclude "COVID".
 
-  - Level 2: ``#``
+and this plugin with highlight the "FIXED" word using a strikethrough.
 
-  - Level 3: ``=``
+Which FIVER words signify completion
+====================================
 
-  - Level 4: ``-``
+Almost any five-letter uppercase word that ends in "D" will be highlighted
+with a strikethrough.
 
-(Note that characters used for the higher levels use more pixels per
-character than those in lower levels. So, visually, higher level
-headings appear darker.)
+This includes the following::
 
-- Note that each document must only have one Level 1 heading, at the top.
+  FIXED (when a "FIXME" is complete)
+  ORDRD (when you complete an "ORDER" item)
+  WAITD (after an "AWAIT" task is complete)
 
-  This section is never folded.
+and anything else you can dream up.
 
-- Use the normal Vim fold commands to open and close folds.
+Note that some words that are not past tense words are specifically
+excluded, including "BUILD", "FOUND", and, of course, "COVID".
 
-  E.g., type ``zr`` (in Normal mode) to collapse one level of folds.
+This plugin also recognizes a few other special terms, including::
 
-  Or type ``zm`` to open one level of folds, or ``za`` to toggle the
-  current fold open and closed.
+  SPOKE (the completed state for "SPIKE", I know, it's silly)
+  ANNUL (how you might cancel any task you choose not to complete)
 
-- As an example, this document has two Level 2 sections::
+Suggesting FIVERs
+=================
 
-    @@@@@@@@@@@@@@
-    Document Title
-    @@@@@@@@@@@@@@
+The author is more than willing to entertain new FIVER words, or changes
+to the dictionary setup by this plugin. But note that how anyone chooses
+to use this plugin is probably very specific to their own tastes. So you
+might just want to fork the plugin and tweak the dictionary to your liking.
 
-    ###############
-    Level 2 Section
-    ###############
-
-    ===============
-    Level 3 Section
-    ===============
-
-    #######################
-    Another Level 2 Section
-    #######################
-
-    =======================
-    Another Level 3 Section
-    =======================
-
-    Another Level 3 section, but ignored by folder
-    ==============================================
-
-    --------------------------
-    A Foldable Level 4 Section
-    --------------------------
-
-**Use the 4 characters (@, #, =, and -) to signify the different heading levels.**
-
-Usage: Press ``<F5>`` to Manually Recalculate Folds
-===================================================
-
-By default, Vim enables reST folding.
-
-But this can cause performance issues, e.g., every time you insert or
-remove a character from a buffer, Vim has to recalculate folds.
-
-To prevent performance issues, the user must explicitly generate folds.
-
-**Press <F5> to generate (and collapse all) folds.**
-
-Usage: Use ``<C-Up>`` and ``<C-Down>`` to Transpose Folds
-=========================================================
-
-In normal mode, with the cursor over a folded reST section,
-press ``<Ctrl-Up>`` to swap the fold under the cursor with the
-fold under the line above the cursor; press ``<Ctrl-Down>`` to
-swap with the fold on the line following the current fold.
-
-**Swap reST Sections (Transpose Folds) using ``<C-Up>`` and ``<C-Down>``.**
-
-Tip: You Can Beautify Titles When Collapsed
-===========================================
-
-The reST section title that's sandwiched between the section delimiter
-lines is used for the folded view title.
-
-Because of this, you can design section titles that look good folded, too.
-
-For instance, consider the following, unfolded document::
-
-  @@@@@
-  NOTES
-  @@@@@
-
-  ###########################################################
-  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-  ###########################################################
-
-  ###########################################################
-  ┣━━ // * TABLE_OF_CONTENTS * // ━━━━━━━━━━━━━━━━━━━━━━━━━━┨
-  ###########################################################
-
-  ###########################################################
-  ┃   ┏━━━━━━━━━━━━━┓                                       ┃
-  ###########################################################
-
-  ###########################################################
-  ┃   ┃ ☼ FOO BAR ☼ ┃                                       ┃
-  ###########################################################
-
-  ###########################################################
-  ┃ ┏━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ┃
-  ###########################################################
-
-  ###########################################################
-  ┃ ┃ SECTION X: Blah blah blah                           ┃ ┃
-  ###########################################################
-
-  Blah blah blah
-
-  ###########################################################
-  ┃ ┃ SECTION Y: Blasé blasé blasé                        ┃ ┃
-  ###########################################################
-
-  Blasé blasé blasé
-
-  ###########################################################
-  ┃ ┃ SECTION Z: Patati Patata                            ┃ ┃
-  ###########################################################
-
-  Patati Patata
-
-  ###########################################################
-  ┃ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ┃
-  ###########################################################
-
-  ###########################################################
-  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-  ###########################################################
-
-Once folded (e.g., press ``<F5>``), it'll look like this::
-
-   1 @@@@@
-   2 NOTES
-   3 @@@@@
-   4
-   5 │  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓      │  4 ll. │
-   9 │  ┣━━ // * TABLE_OF_CONTENTS * // ━━━━━━━━━━━━━━━━━━━━━━━━━━┨      │  4 ll. │
-  13 │  ┃   ┏━━━━━━━━━━━━━┓                                       ┃      │  4 ll. │
-  17 │  ┃   ┃ ☼ FOO BAR ☼ ┃                                       ┃      │  4 ll. │
-  21 │  ┃ ┏━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ┃      │  4 ll. │
-  25 ├─ ┃ ┃ SECTION X: Blah blah blah                           ┃ ┃    ──┤  6 ll. ├─
-  31 ├─ ┃ ┃ SECTION Y: Blasé blasé blasé                        ┃ ┃    ──┤  6 ll. ├─
-  37 ├─ ┃ ┃ SECTION Z: Patati Patata                            ┃ ┃    ──┤  6 ll. ├─
-  43 │  ┃ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ┃      │  4 ll. │
-  47 │  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛      │  4 ll. │
-
-.. 2021-08-12: Here's what the folding used to look like, before overriding
-..             Vim's default folding markup:
-.. 
-..    1 +-- ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ---- |  4 lines |--
-..    5 +-- ┣━━ // * TABLE_OF_CONTENTS * // ━━━━━━━━━━━━━━━━━━━━━━━━━━┨ ---- |  4 lines |--
-..    9 +-- ┃   ┏━━━━━━━━━━━━━┓                                       ┃ ---- |  4 lines |--
-..   13 +-- ┃   ┃ ☼ FOO BAR ☼ ┃                                       ┃ ---- |  4 lines |--
-..   17 +-- ┃ ┏━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ┃ ---- |  4 lines |--
-..   21 +-- ┃ ┃ SECTION X: Blah blah blah                           ┃ ┃ ---- |  6 lines |--
-..   27 +-- ┃ ┃ SECTION Y: Blasé blasé blasé                        ┃ ┃ ---- |  6 lines |--
-..   33 +-- ┃ ┃ SECTION Z: Patati Patata                            ┃ ┃ ---- |  6 lines |--
-..   39 +-- ┃ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ┃ ---- |  4 lines |--
-..   43 +-- ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ---- |  4 lines |--
-
-Tips: Change ``redrawtime`` for Very Large Documents
-====================================================
-
-Vim's default ``redrawtime`` (``:echo &rdt``) is "2000", or 2 seconds.
-
-If Vim runs longer than this during syntax matching, it cancels the operation
-and logs the message, "'redrawtime' exceeded, syntax highlighting disabled".
-
-You can set this value larger to tell Vim to run the parser longer,
-e.g., ``:set redrawtime=10000``, or, better yet, you can add a modeline
-(such as one read by https://github.com/landonb/dubs_style_guard)
-to any reST document that needs extra parsing time. E.g., at the top
-of a reST document, you could add::
-
-  .. vim:rdt=10000
+But the author would still love to hear about how you use and how you've
+personalized this plugin! (Indeed, if anyone likes this plugin, please
+give the project a star, I'd love to know that other devs enjoy it as
+much as I do. =)
 
 Tips: Related supercharged reST plugins
 =======================================
 
 Consider these complementary reST highlights plugins that pair
 well with this plugin to help you take notes in Vim:
+
+- Advanced reST document section folder.
+
+  `https://github.com/landonb/vim-reSTfold#🙏
+  <https://github.com/landonb/vim-reSTfold#🙏>`__
+
+  Supercharge your notetaking and recordkeeping!
+
+  Add section folding to your reST notes so you can,
+  e.g., collapse a 10,000-line-long TODO file and get a
+  nice high-level view of all the things you wanna do.
 
 - Additional syntax highlight rules.
 
@@ -320,23 +202,6 @@ well with this plugin to help you take notes in Vim:
 
   Colorize email addresses and host names, and disable spell checking
   on emails, hosts, and acronyms (all-capital words).
-
-- Special so-called *FIVER* syntax rules.
-
-  `https://github.com/landonb/vim-reST-highfive#🖐
-  <https://github.com/landonb/vim-reST-highfive#🖐>`__
-
-  Highlight action words.
-
-  E.g., "FIXME" is emphasized (in bright, bold yellow), and so is
-  "FIXED" (crossed-out and purple), and so are "MAYBE", "LEARN",
-  "ORDER", and "CHORE", and a few other choice five-letter words.
-
-  Why five letters? So that you can use action words in section
-  headers, and then the heading titles align nicely when folded.
-  (Really, it's only important that each action word is the same
-  width, and not necessarily that it's five long — but *FIXME* is
-  the ultimate developer action word, so might as well be five.)
 
 - Simple horizontal rule highlight.
 
