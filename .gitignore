@@ -1,2 +1,8 @@
 doc/tags
 
+# 2022-10-05: I made a `FIVERs.vim` symlink → after/syntax/rst.vim,
+# so that I can search for file easily via Vim project_tray window,
+# and I don't have to dig (as much) for it.
+# CXREF: FIXME/LATER: Add ref. to DepoXy OMR config that makes `FIVERs.vim`.
+FIVERs.vim
+
