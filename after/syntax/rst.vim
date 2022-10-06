@@ -181,8 +181,57 @@ endfunction
 "   terminal Vim uses `cterm=`,
 "   I'm not sure what uses `term=`.
 function! s:HighFive_XXXXDs_EndsWith_D()
-  syn match FiverWordsXXXXDd '\%(\(^\|[[:space:]\n\[(#]\)\zs\(BUILD\|COVID\|FOUND\)\([.,:/[:space:]\n]\)\@=\)\@!\(\(^\|[[:space:]\n\[(#]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\([.,:/[:space:]\n]\)\@=\)' contains=@NoSpell
-  hi def FiverWordsXXXXDd guifg=Purple gui=strikethrough cterm=strikethrough
+
+  let l:fivers = []
+
+  " BUILD: Tell yourself to build something, e.g., a 'gravel grinder'.
+  " - I.e., software, or IRL.
+  let l:fivers = add(l:fivers, 'BUILD')
+
+  " COPYD: One of the author's latest conventions (2022-10-05):
+  " - Remake _FIXME_ into _COPYD_ when you retire one _FIXME_
+  "   that's duplicated elsewhere.
+  "   - One use case: You have multiples of the same _FIXME_.
+  "     - You want to retire one _FIXME_, but to tell yourself
+  "       that it's not _FIXED_, but that it's _COPYD_ elsewhere,
+  "       and still alive in your backlogs somewhere.
+  "   - Another case: You have multiple actions under a _FIXME_,
+  "     and you complete some of them. You then copy the unfinished
+  "     tasks to a new _FIXME_, and you mark the old _FIXME_ as
+  "     _COPYD_, telling yourself that you completed some of them,
+  "     but not all, and that those you didn't complete are still
+  "     accounted for.
+  " - It follows that COPYD is a completion status, and
+  "   not to be struck-through:
+  "   - " NOTIT: a let l:fivers = add(l:fivers, 'COPYD')
+
+  " COVID: More technically, COVID-19, the coronavirus, or SARS-CoV-2.
+  " - "The shortened form COVID is acceptable if necessary for space in headlines,
+  "    and in direct quotations and proper names."
+  "    https://www.linkedin.com/pulse/ap-style-guide-covid-19-michael-grabowski/
+  " - 👁ALSO: https://www.prnewsonline.com/ap-style-covid/
+  let l:fivers = add(l:fivers, 'COVID')
+
+  " FOUND: When you left a note to yourself to dig around for something
+  " (in digitial docs, or in real life) and then found it, and now you're
+  " retiring that note.
+  let l:fivers = add(l:fivers, 'FOUND')
+
+  " WEIRD: Like it sounds. Just a note that something is 'weird'.
+  " - Not an action, just a label.
+  let l:fivers = add(l:fivers, 'WEIRD')
+
+  " Seems legit.
+  let l:fivers = add(l:fivers, 'POOPD')
+
+  " *** EOList
+
+  let l:fiver_re = join(l:fivers, '\|')
+  let l:fiver_pat = '\%(\(^\|[[:space:]\n\[(#]\)\zs\(' . l:fiver_re . '\)\([.,:/[:space:]\n]\)\@=\)\@!\(\(^\|[[:space:]\n\[(#]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\([.,:/[:space:]\n]\)\@=\)'
+  let l:syn_cmd = "syn match FiverWordsXXXXD '" . l:fiver_pat . "' contains=@NoSpell"
+  exec l:syn_cmd
+
+  hi def FiverWordsXXXXD guifg=Purple gui=strikethrough cterm=strikethrough
 endfunction
 
 " -------
