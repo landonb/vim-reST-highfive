@@ -224,6 +224,15 @@ function! s:HighFive_XXXXDs_EndsWith_D()
   " Seems legit.
   let l:fivers = add(l:fivers, 'POOPD')
 
+  " Aka, ONBOARDING, for SETUP notes.
+  let l:fivers = add(l:fivers, 'ONBRD')
+
+  " Aka, DEMOED. Except this is a ~completed~ task.
+  "  let l:fivers = add(l:fivers, 'DEMOD')
+
+  " Never let up.
+  let l:fivers = add(l:fivers, 'SPEED')
+
   " *** EOList
 
   let l:fiver_re = join(l:fivers, '\|')
