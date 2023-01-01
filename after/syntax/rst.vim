@@ -233,6 +233,10 @@ function! s:HighFive_XXXXDs_EndsWith_D()
   " Never let up.
   let l:fivers = add(l:fivers, 'SPEED')
 
+  " oulda's
+  let l:fivers = add(l:fivers, 'COULD')
+  let l:fivers = add(l:fivers, 'WOULD')
+
   " *** EOList
 
   let l:fiver_re = join(l:fivers, '\|')
