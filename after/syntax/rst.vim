@@ -82,6 +82,22 @@ function! s:HighFive_FIVERs_Punctuated()
   hi def FIVERsPunctuated guifg=#caf751 gui=bold cterm=bold
 endfunction
 
+" Don't highlight number-only arbitrary FIVERs matched by FIVERsPunctuated
+" (Or, rather, steal the match and mimic the Normal highlight).
+" - E.g., avoid highlighting 12345: or 68041/.
+function! s:HighFive_FIVERs_No_Allnums()
+  " TRYME:
+  "   :echo matchstr("12345:", '\%(^\|[[:space:]\n<\[({]\)\zs[[:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("42069/", '\%(^\|[[:space:]\n<\[({]\)\zs[[:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+
+  syn match FIVERsPunctuatedNoAllnums '\%(^\|[[:space:]\n<\[({]\)\zs[[:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!' contains=@NoSpell
+
+  " COPYD: Default to Dubs After Dark 'Normal' highlight:
+  "          highlight Normal ctermfg=15 guifg=White guibg=#060606
+  " - CXREF: ~/.vim/pack/landonb/start/dubs_after_dark/colors/after-dark.vim:106
+  hi def FIVERsPunctuatedNoAllnums ctermfg=15 guifg=White cterm=NONE
+endfunction
+
 " +----------------------------------------------------------------------+
 
 " Second match: Proactively (always) highlight specific FIVER words.
@@ -412,6 +428,7 @@ function! s:reST_highfive_Wire_Highlights()
   if (l:redrawtimeout == l:defaultRedrawTimeout)
      \ || (l:redrawtimeout > l:syntaxEnableIfGreater)
     call s:HighFive_FIVERs_Punctuated()
+    call s:HighFive_FIVERs_No_Allnums()
     call s:HighFive_FIVERs_Always_Hot()
     call s:HighFive_XXXXDs_EndsWith_D()
     call s:HighFive_XXXXDs_SimplePast()
