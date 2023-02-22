@@ -129,7 +129,41 @@ function! s:HighFive_FIVERs_Always_Hot()
   "   not see a change, FIVERsAlways_Hot still takes ~0.10 secs. on a ~10k line file.
   "   E.g.,
   "     let l:fiver_pat = '\(^\|[[:space:]\n\[(#]\)\zs\(' . l:fiver_re . '\)\ze\([.,:/[:space:]\n]\)'
-  let l:fiver_pat = '\(^\|[[:space:]\n\[(#]\)\zs\(' . l:fiver_re . '\)\([.,:/[:space:]\n]\)\@='
+  " - This was the pattern until updated to avoid rstSections clash:
+  "     let l:fiver_pat = '\(^\|[[:space:]\n\[(#]\)\zs\(' . l:fiver_re . '\)\([.,:/[:space:]\n]\)\@='
+  "   - TRYME:
+  "       :echo matchstr(' A special FIVER ', '\(^\|[[:space:]\n\[(#]\)\zs\(FIVER\)\([.,:/[:space:]\n]\)\@=')
+  " - The newest pattern (below) avoids inconsistent clashing with rstSections.
+  "   - When a special FIVER *starts* (and only when it starts)
+  "     the title of a reSTfold section;
+  "     But only (that I saw before I fixed it) if it's got a
+  "     single equal sign underscore, e.g.,
+  "        FIVER: This does not highlight correctly
+  "        ========================================
+  "     Or if surrounded by @ symbols, e.g,
+  "        @@@@@@@@@@@@@@@
+  "        FIVER: Nor this
+  "        @@@@@@@@@@@@@@@
+  "     But not if surrounded or underscored by #'s;
+  "     Then the reSTfold title line is not highlighted by rstSections,
+  "     but the FIVER is highlighted instead, and the remaining text
+  "     is highlighted normally (i.e., not highlighted; just white).
+  "   - I tried moving this definition to a syntax/rst.vim, which
+  "     made it load *before* rstSections, but that no effect. So
+  "     I guess :highlight match order *just doesn't matter.*
+  "   - The solution is a negative look-ahead (\@=) using this
+  "     block:
+  "      [=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]
+  "    from rstSections in
+  "      ~/.vim/pack/landonb/start/vim-reSTfold/after/syntax/rst.vim:131
+  "    and used here to avoid stealing rstSections highlight.
+  "    - PROFILING: But at what cost?
+  "
+  " TRYME:
+  "   :echo matchstr("A FIVER you bet",        '\(^\|[[:space:]\n\[(#]\)\zs\(FIVER\)\([.,:/[:space:]\n]\)\@=\(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\5\{4,\}$\)\@!')
+  "   :echo matchstr("FIVER nope nope\n@@@@@", '\(^\|[[:space:]\n\[(#]\)\zs\(FIVER\)\([.,:/[:space:]\n]\)\@=\(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\5\{4,\}$\)\@!')
+  "
+  let l:fiver_pat = '\(^\|[[:space:]\n\[(#]\)\zs\(' . l:fiver_re . '\)\([.,:/[:space:]\n]\)\@=\(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\5\{4,\}$\)\@!'
   let l:syn_cmd = "syn match FIVERsAlways_Hot '" . l:fiver_pat . "' contains=@NoSpell"
   exec l:syn_cmd
 
