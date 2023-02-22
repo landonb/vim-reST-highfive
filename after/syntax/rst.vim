@@ -57,9 +57,18 @@
 "   :h /character-classes
 "   :h gui-colors
 function! s:HighFive_FIVERs_Punctuated()
-  syn match FIVERsPunctuated '\(^\|[[:space:]\n\[(#]\)\zs[_[:upper:][:digit:]]\{5}\([/:]\)\@=' contains=@NoSpell
+  " See FIVERsAlways_Hot comments: Avoid stealing highlight from rstSections
+  " by using elaborate rstSections check, including for reSTfold delimiters:
+  "   [=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]
+  "
+  " TRYME:
+  "   :echo matchstr("FIVER: You bet!\n####@",    '\(^\|[[:space:]\n\[(#]\)\zs[_[:upper:][:digit:]]\{5}\([/:]\)\@=\(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\4\{4,\}\($\|\n\)\)\@!')
+  "   :echo matchstr("FIVER: Move along!\n@@@@@", '\(^\|[[:space:]\n\[(#]\)\zs[_[:upper:][:digit:]]\{5}\([/:]\)\@=\(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\4\{4,\}$\)\@!')
+  "
+  syn match FIVERsPunctuated '\(^\|[[:space:]\n\[(#]\)\zs[_[:upper:][:digit:]]\{5}\([/:]\)\@=\(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\4\{4,\}$\)\@!' contains=@NoSpell
   "                                                              Followed by a slash ^
   "                                                                    ... or a colon ^
+  "                Not followed by rstSections reSTfold header indicator (on following line) ^ \(...\)\@!
 
   " Not as bright a yellow, to be less noticeable than FIVERsAlways_Hot.
   hi def FIVERsPunctuated guifg=#caf751 gui=bold cterm=bold
