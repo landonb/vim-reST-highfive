@@ -62,10 +62,18 @@ function! s:HighFive_FIVERs_Punctuated()
   "   [=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]
   "
   " TRYME:
-  "   :echo matchstr("FIVER: You bet!\n####@",    '\%(^\|[[:space:]\n\[(#]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
-  "   :echo matchstr("FIVER: Move along!\n@@@@@", '\%(^\|[[:space:]\n\[(#]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("FIVER: You bet!\n####@",  '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("FIVER: You wish!\n@@@@@", '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr( "FIVER:",                 '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr( "FIVER/",                 '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("<FIVER:>",                '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("(FIVER/)",                '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("[FIVER:]",                '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("{FIVER/}",                '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   # I do not remember why I had this use case, so removed it:
+  "   :echo matchstr("#FIVER: support removed", '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
   "
-  syn match FIVERsPunctuated '\%(^\|[[:space:]\n\[(#]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!' contains=@NoSpell
+  syn match FIVERsPunctuated '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!' contains=@NoSpell
   "                                                              Followed by a slash ^
   "                                                                    ... or a colon ^
   "                Not followed by rstSections reSTfold header indicator (on following line) ^ \(...\)\@!
@@ -169,10 +177,17 @@ function! s:HighFive_FIVERs_Always_Hot()
   "    - PROFILING: But at what cost?
   "
   " TRYME:
-  "   :echo matchstr("A FIVER you bet",        '\%(^\|[[:space:]\n\[(#]\)\zs\%(FIVER\)\%([.,:/[:space:]\n]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}$\)\@!')
-  "   :echo matchstr("FIVER nope nope\n@@@@@", '\%(^\|[[:space:]\n\[(#]\)\zs\%(FIVER\)\%([.,:/[:space:]\n]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}$\)\@!')
+  "   :echo matchstr("A FIVER you bet",        '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIVER\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}$\)\@!')
+  "   :echo matchstr("FIVER nope nope\n@@@@@", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIVER\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}$\)\@!')
+  "   :echo matchstr( "HOTTY",                 '\%(^\|[[:space:]\n<\[({]\)\zs\%(HOTTY\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}$\)\@!')
+  "   :echo matchstr( "HOTTY/",                '\%(^\|[[:space:]\n<\[({]\)\zs\%(HOTTY\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}$\)\@!')
+  "   :echo matchstr( "HOTTY:",                '\%(^\|[[:space:]\n<\[({]\)\zs\%(HOTTY\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}$\)\@!')
+  "   :echo matchstr("<HOTTY>",                '\%(^\|[[:space:]\n<\[({]\)\zs\%(HOTTY\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}$\)\@!')
+  "   :echo matchstr("(HOTTY:)",               '\%(^\|[[:space:]\n<\[({]\)\zs\%(HOTTY\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}$\)\@!')
+  "   :echo matchstr("[HOTTY/]",               '\%(^\|[[:space:]\n<\[({]\)\zs\%(HOTTY\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}$\)\@!')
+  "   :echo matchstr("{HOTTY}",                '\%(^\|[[:space:]\n<\[({]\)\zs\%(HOTTY\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}$\)\@!')
   "
-  let l:fiver_pat = '\%(^\|[[:space:]\n\[(#]\)\zs\%(' . l:fiver_re . '\)\%([.,:/[:space:]\n]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}$\)\@!'
+  let l:fiver_pat = '\%(^\|[[:space:]\n<\[({]\)\zs\%(' . l:fiver_re . '\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}$\)\@!'
   let l:syn_cmd = "syn match FIVERsAlways_Hot '" . l:fiver_pat . "' contains=@NoSpell"
   exec l:syn_cmd
 
@@ -286,11 +301,18 @@ function! s:HighFive_XXXXDs_EndsWith_D()
   " doesn't seem to be necessary for this highlight, not sure why.
   "
   " TRYME:
-  "   :echo matchstr("FIXED included", '\%(\%(^\|[[:space:]\n\[(#]\)\zs\%(POOPD\)\%([.,:/[:space:]\n]\)\@=\)\@!\%(\%(^\|[[:space:]\n\[(#]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%([.,:/[:space:]\n]\)\@=\)')
-  "   :echo matchstr("POOPD excluded", '\%(\%(^\|[[:space:]\n\[(#]\)\zs\%(POOPD\)\%([.,:/[:space:]\n]\)\@=\)\@!\%(\%(^\|[[:space:]\n\[(#]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%([.,:/[:space:]\n]\)\@=\)')
+  "   :echo matchstr("FIXED included", '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
+  "   :echo matchstr("POOPD excluded", '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
+  "   :echo matchstr( "FIVRD",         '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
+  "   :echo matchstr( "FIVRD/",        '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
+  "   :echo matchstr(" FIVRD ",        '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
+  "   :echo matchstr("<FIVRD>",        '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
+  "   :echo matchstr("(FIVRD)",        '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
+  "   :echo matchstr("[FIVRD]",        '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
+  "   :echo matchstr("{FIVRD}",        '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
   "
   let l:fiver_re = join(l:fivers, '\|')
-  let l:fiver_pat = '\%(\%(^\|[[:space:]\n\[(#]\)\zs\%(' . l:fiver_re . '\)\%([.,:/[:space:]\n]\)\@=\)\@!\%(\%(^\|[[:space:]\n\[(#]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%([.,:/[:space:]\n]\)\@=\)'
+  let l:fiver_pat = '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(' . l:fiver_re . '\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)'
   let l:syn_cmd = "syn match FiverWordsXXXXD '" . l:fiver_pat . "' contains=@NoSpell"
   exec l:syn_cmd
 
@@ -313,9 +335,17 @@ function! s:HighFive_XXXXDs_SimplePast()
 
   " *** EOL
 
+  " TRYME:
+  "   :echo matchstr( "SPOKE",  '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPOKE\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
+  "   :echo matchstr(" SPOKE ", '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPOKE\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
+  "   :echo matchstr("<SPOKE>", '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPOKE\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
+  "   :echo matchstr("(SPOKE)", '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPOKE\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
+  "   :echo matchstr("[SPOKE]", '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPOKE\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
+  "   :echo matchstr("{SPOKE}", '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPOKE\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
+  "
   let l:fiver_re = join(l:fivers, '\|')
   " Profiling: See comments near HighFive_FIVERs_Always_Hot's l:fiver_pat re: \zs vs. \@<=.
-  let l:fiver_pat = '\%(^\|[[:space:]\n\[(#]\)\zs\%(' . l:fiver_re . '\)\%([.,:/[:space:]\n]\)\@='
+  let l:fiver_pat = '\%(^\|[[:space:]\n<\[({]\)\zs\%(' . l:fiver_re . '\)\%($\|[[:space:]\n.,/:>\])}]\)\@='
   let l:syn_cmd = "syn match FiverWordsXXXXDs '" . l:fiver_pat . "' contains=@NoSpell"
   exec l:syn_cmd
 
