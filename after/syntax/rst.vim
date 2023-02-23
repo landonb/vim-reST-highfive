@@ -264,6 +264,9 @@ function! s:HighFive_XXXXDs_EndsWith_D()
   " - I.e., software, or IRL.
   let l:fivers = add(l:fivers, 'BUILD')
 
+  " SCHED: Note to schedule something (e.g., doc appt).
+  let l:fivers = add(l:fivers, 'SCHED')
+
   " COPYD: One of the author's latest conventions (2022-10-05):
   " - Remake _FIXME_ into _COPYD_ when you retire one _FIXME_
   "   that's duplicated elsewhere.
