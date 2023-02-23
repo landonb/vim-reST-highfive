@@ -85,6 +85,7 @@ endfunction
 " Don't highlight number-only arbitrary FIVERs matched by FIVERsPunctuated
 " (Or, rather, steal the match and mimic the Normal highlight).
 " - E.g., avoid highlighting 12345: or 68041/.
+" - PROFILING: I assume this is cheaper than a look-ahead in FIVERsPunctuated.
 function! s:HighFive_FIVERs_No_Allnums()
   " TRYME:
   "   :echo matchstr("12345:",        '\%(^\|[[:space:]\n<\[({]\)\zs[[:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
