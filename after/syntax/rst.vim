@@ -316,6 +316,8 @@ function! s:HighFive_XXXXDs_EndsWith_D()
   let l:fivers = add(l:fivers, 'COULD')
   let l:fivers = add(l:fivers, 'WOULD')
 
+  let l:fivers = add(l:fivers, 'ERRND')
+
   " *** EOList
 
   " SAVVY: Re: FIVERsAlways_Hot comments re: Not stealing highlight from rstSections,
