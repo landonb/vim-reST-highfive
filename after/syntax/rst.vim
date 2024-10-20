@@ -74,9 +74,9 @@ function! s:HighFive_FIVERs_Punctuated()
   "   :echo matchstr("#FIVER: support removed", '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
   "
   syn match FIVERsPunctuated                    '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!' contains=@NoSpell
-  "                                                              Followed by a slash ^
-  "                                                                    ... or a colon ^
-  "                Not followed by rstSections reSTfold header indicator (on following line) ^ \(...\)\@!
+  "                                                                                    Followed by a slash ^
+  "                                                                                          ... or a colon ^
+  "                                           Not followed by rstSections reSTfold header indicator (on following line) ^ \(..............................................................\)\@!
 
   " Not as bright a yellow, to be less noticeable than FIVERsAlways_Hot.
   hi def FIVERsPunctuated guifg=#caf751 gui=bold cterm=bold
