@@ -240,15 +240,21 @@ endfunction
 " +======================================================================+
 " +======================================================================+
 
-" Strikethrough any FIVER ending in 'D'.
-" - Except COVID, and whatever else you want to allowlist.
-" - FIVERs that end in 'D' (aka XXXXD) are generally the completed state of
-"   active FIVERs, using the common English language past tense conjugation.
-"   - Some examples:
-"     - FIXME → FIXED  # For items you fixed, 'natch.
-"     - ORDER → ORDRD  # For products you wanted to purchase.
-"     - AWAIT → WAITD  # For items that were delayed until later date or external trigger.
-"     - PACKT → PACKD  # For items you wanted to pack for a trip, and then did.
+" Strikethrough FIVERs that represent the completed state of active FIVERs,
+" using the common English language past tense conjugation.
+" Some Examples: (Where FIXEM is a FIXME without the syntax highlight):
+"   - FIXEM → FIXED  # For items you fixed, 'natch.
+"   - FIXEM → ANNUL  # Any canceled task, e.g., a FIXME you WONTFIX.
+"   - ***** → NOTED  # For any note you want to deprioritize.
+"   - ***** → COPYD  # For any note you want to mark as duplicate.
+"   - ORDER → ORDRD  # For products that you've purchased.
+"   - SNIPD          # For text you moved from elsewhere, where you want a backref.
+"   - SHIPD → RECVD  # For something that was shipped that's since been received.
+"   - SPIKE → SPOKE  # Awkwardly-named finished state of SPIKE.
+"   - AWAIT → WAITD  # For items that were delayed until later date or external trigger.
+" History: This plugin used to ~~strikethrough~~ any FIXED ending in XXXXD,
+" which is fast, but then you end up with a lot of stricken words that you
+" really don't want highlighted as such.
 " Pattern HINTS:
 " - \%(...\)  - Like \(\), but without counting as sub-expression, and a little bit faster.
 " - \@!       - Matches with zero width if preceding atom does NOT match.
@@ -256,116 +262,30 @@ endfunction
 " - GTK gVim uses `gui=`,
 "   terminal Vim uses `cterm=`,
 "   I'm not sure what uses `term=`.
-function! s:HighFive_XXXXDs_EndsWith_D()
-
-  let l:fivers = []
-
-  " BUILD: Tell yourself to build something, e.g., a 'gravel grinder'.
-  " - I.e., software, or IRL.
-  let l:fivers = add(l:fivers, 'BUILD')
-
-  " SCHED: Note to schedule something (e.g., doc appt).
-  let l:fivers = add(l:fivers, 'SCHED')
-
-  " COPYD: One of the author's latest conventions (2022-10-05):
-  " - Remake _FIXME_ into _COPYD_ when you retire one _FIXME_
-  "   that's duplicated elsewhere.
-  "   - One use case: You have multiples of the same _FIXME_.
-  "     - You want to retire one _FIXME_, but to tell yourself
-  "       that it's not _FIXED_, but that it's _COPYD_ elsewhere,
-  "       and still alive in your backlogs somewhere.
-  "   - Another case: You have multiple actions under a _FIXME_,
-  "     and you complete some of them. You then copy the unfinished
-  "     tasks to a new _FIXME_, and you mark the old _FIXME_ as
-  "     _COPYD_, telling yourself that you completed some of them,
-  "     but not all, and that those you didn't complete are still
-  "     accounted for.
-  " - It follows that COPYD is a completion status, and
-  "   not to be struck-through:
-  "   - " NOTIT: a let l:fivers = add(l:fivers, 'COPYD')
-
-  " COVID: More technically, COVID-19, the coronavirus, or SARS-CoV-2.
-  " - "The shortened form COVID is acceptable if necessary for space in headlines,
-  "    and in direct quotations and proper names."
-  "    https://www.linkedin.com/pulse/ap-style-guide-covid-19-michael-grabowski/
-  " - 👁ALSO: https://www.prnewsonline.com/ap-style-covid/
-  let l:fivers = add(l:fivers, 'COVID')
-
-  " FOUND: When you left a note to yourself to dig around for something
-  " (in digitial docs, or in real life) and then found it, and now you're
-  " retiring that note.
-  let l:fivers = add(l:fivers, 'FOUND')
-
-  " WEIRD: Like it sounds. Just a note that something is 'weird'.
-  " - Not an action, just a label.
-  let l:fivers = add(l:fivers, 'WEIRD')
-
-  " Seems legit.
-  let l:fivers = add(l:fivers, 'POOPD')
-
-  " Aka, ONBOARDING, for SETUP notes.
-  let l:fivers = add(l:fivers, 'ONBRD')
-
-  " Aka, DEMOED. Except this is a ~completed~ task.
-  "  let l:fivers = add(l:fivers, 'DEMOD')
-
-  " Never let up.
-  let l:fivers = add(l:fivers, 'SPEED')
-
-  " oulda's
-  let l:fivers = add(l:fivers, 'COULD')
-  let l:fivers = add(l:fivers, 'WOULD')
-
-  let l:fivers = add(l:fivers, 'ERRND')
-
-  " *** EOList
-
-  " SAVVY: Re: FIVERsAlways_Hot comments re: Not stealing highlight from rstSections,
-  " doesn't seem to be necessary for this highlight, not sure why.
-  "
-  " TRYME:
-  "   :echo matchstr("FIXED included", '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
-  "   :echo matchstr("POOPD excluded", '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
-  "   :echo matchstr( "FIVRD",         '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
-  "   :echo matchstr( "FIVRD/",        '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
-  "   :echo matchstr(" FIVRD ",        '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
-  "   :echo matchstr("<FIVRD>",        '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
-  "   :echo matchstr("(FIVRD)",        '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
-  "   :echo matchstr("[FIVRD]",        '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
-  "   :echo matchstr("{FIVRD}",        '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(ZABCD\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)')
-  "
-  let l:fiver_re = join(l:fivers, '\|')
-  let l:fiver_pat =                    '\%(\%(^\|[[:space:]\n<\[({]\)\zs\%(' . l:fiver_re . 
-    \                                                                          '\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\)\@!\%(\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][[:upper:]][[:upper:]][[:upper:]]D\%($\|[[:space:]\n.,/:>\])}]\)\@=\)'
-  let l:syn_cmd = "syn match FiverWordsXXXXD '" . l:fiver_pat . "' contains=@NoSpell"
-  exec l:syn_cmd
-
-  hi def FiverWordsXXXXD guifg=Purple gui=strikethrough cterm=strikethrough
-endfunction
-
-" -------
-
-" Not all English words that indicate the Simple Past tense or otherwise
-" signify a completed task end in 'D'. Those FIVER words are listed here.
 
 function! s:HighFive_XXXXDs_SimplePast()
 
-  " YOU: Modify this list to your liking.
+  " USAGE: Modify this list to your liking.
 
   let l:fivers = []
 
-  let l:fivers = add(l:fivers, 'SPOKE')  " Awkwardly-named finished state of SPIKE.
-  let l:fivers = add(l:fivers, 'ANNUL')  " Any canceled task, e.g., a FIXME you WONTFIX.
-
-  " *** EOL
+  let l:fivers = add(l:fivers, 'FIXED')
+  let l:fivers = add(l:fivers, 'ANNUL')
+  let l:fivers = add(l:fivers, 'NOTED')
+  let l:fivers = add(l:fivers, 'COPYD')
+  let l:fivers = add(l:fivers, 'ORDRD')
+  let l:fivers = add(l:fivers, 'SNIPD')
+  let l:fivers = add(l:fivers, 'RECVD')
+  let l:fivers = add(l:fivers, 'SPOKE')
+  let l:fivers = add(l:fivers, 'WAITD')
 
   " TRYME:
-  "   :echo matchstr( "SPOKE",  '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPOKE\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
-  "   :echo matchstr(" SPOKE ", '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPOKE\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
-  "   :echo matchstr("<SPOKE>", '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPOKE\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
-  "   :echo matchstr("(SPOKE)", '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPOKE\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
-  "   :echo matchstr("[SPOKE]", '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPOKE\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
-  "   :echo matchstr("{SPOKE}", '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPOKE\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
+  "   :echo matchstr( "FIXED",  '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
+  "   :echo matchstr(" ANNUL ", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
+  "   :echo matchstr("<FIXED>", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
+  "   :echo matchstr("(ANNUL)", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
+  "   :echo matchstr("[FIXED]", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
+  "   :echo matchstr("{ANNUL}", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
   "
   let l:fiver_re = join(l:fivers, '\|')
   " Profiling: See comments near HighFive_FIVERs_Always_Hot's l:fiver_pat re: \zs vs. \@<=.
@@ -438,7 +358,6 @@ function! s:reST_highfive_Wire_Highlights()
     call s:HighFive_FIVERs_Punctuated()
     call s:HighFive_FIVERs_No_Allnums()
     call s:HighFive_FIVERs_Always_Hot()
-    call s:HighFive_XXXXDs_EndsWith_D()
     call s:HighFive_XXXXDs_SimplePast()
   else
     silent! syn clear rstCitationReference

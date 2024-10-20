@@ -67,7 +67,7 @@ such as using "FTREQ" to denote new work that you'd like to complete::
 
 Or if you found an issue that you wanted to fix, you could use "FIXME"::
 
-  FIXME: The 'reST-highfive` pattern should exclude "COVID".
+  FIXME: Promote the 'reST-highfive` plugin.
 
 Other uses include documenting interesting information, such as using
 "SAVVY" to remind yourself of some trick you learned::
@@ -129,41 +129,103 @@ of being punctuated. The list includes::
 Using FIVERs to mark tasks completed
 ====================================
 
-When you're down with a task, you can change the FIVER to indicate that
-the task is completed.
+When you're done with a task, you can change the FIVER to indicate that
+the task is completed, or you can prefix it with a completion FIVER.
 
-For instance, after completing a "FIXME" task, rename it "FIXED".
+For instance, after completing a "FIXME" task, rename it "FIXED", e.g.::
 
-This plugin will specially highlight such FIVERs using a strikethrough.
+  FIXED: Update the README
 
-E.g., if you completed the example task listed above, you could rewrite
-it::
+This plugin will specially highlight these FIVERs using a strikethrough.
 
-  FIXED: The 'reST-highfive` pattern match should exclude "COVID".
+You can also prefix the previous FIVER with the completion FIVER, and
+the old FIVER will no longer be highlighted, e.g.::
 
-and this plugin with highlight the "FIXED" word using a strikethrough.
+  FIXED/FIXME: Send it
+
+will show "FIXED" in strikethrough, and will show "FIXME" unadorned.
 
 Which FIVER words signify completion
 ====================================
 
-Almost any five-letter uppercase word that ends in "D" will be highlighted
-with a strikethrough.
+Some five-letter uppercase words will be highlighted with a strikethrough.
 
-This includes the following::
+For example, when a *FIXME* is *FIXED*, you can rename *FIXME* to *FIXED*.
+Then, instead of yellow and bold, the FIVER is now highlighted purple and
+stricken-through.
 
-  FIXED (when a "FIXME" is complete)
-  ORDRD (when you complete an "ORDER" item)
-  WAITD (after an "AWAIT" task is complete)
+Alternatively (and this is what the author prefers), you can prefix
+the old FIVER, e.g.::
 
-and anything else you can dream up.
+  FIXED/FIXME: Some task
 
-Note that some words that are not past tense words are specifically
-excluded, including "BUILD", "FOUND", and, of course, "COVID".
+Then the "FIXED" will be written in purplish strikethrough, the "FIXME"
+will no longer be highlighted, and you can easily scan the document for
+active FIVERs (which are highlighted in yellow or yellowish-green bold
+text), while preserving the original FIVER type.
 
-This plugin also recognizes a few other special terms, including::
+This following FIVERs are highlighted in purple with strikethrough:
 
-  SPOKE (the completed state for "SPIKE", I know, it's silly)
-  ANNUL (how you might cancel any task you choose not to complete)
+- ``FIXED``
+
+  - For when you complete a "FIXME", or any other actionable FIVER.
+
+- ``ANNUL``
+
+  - For any canceled task, e.g., a *FIXME* that you *WONTFIX*.
+
+- ``NOTED``
+
+  - For non-actionable notes you want to archive, in a sense.
+    (The author uses "NOTED" so that when I'm skimming notes,
+    I can ignore any block of text marked "NOTED" (or marked
+    with any other FIVER that's printed in strikethrough).)
+
+- ``COPYD``
+
+  - For any note you want to mark as duplicate, or if you copy
+    a note somewhere else but want to leave a breadcrumb. (The
+    author uses this in at least two use cases. First, I often
+    find duplicate backlog items, so I'll mark one "COPYD".
+    Second, if I have a long block of notes with multiple FIVERs
+    and some are completed but some are not, I might extract the
+    uncompleted tasks by copying them elsewhere, and then I'll
+    mark the original notes "COPYD". This way I can leave the
+    original note intact, as a point of reference, and for context.)
+
+- ``ORDRD``
+
+  - For something you've purchased. (When the author is thinking about
+    buying something, I'll leave myself an "ORDER" note. If I
+    purchase said thing later, I'll mark it "ORDRD", e.g.,
+    ``ORDRD/ORDER/2024-10-20: Some thing``).
+
+- ``SNIPD``
+
+  - For text you moved from elsewhere, when you want to leave a back-ref.
+    (E.g., ``SNIPD/2024-10-20: Moved from ~/some/file: ...``.)
+
+- ``RECVD``
+
+  - Used to complement "SHIPD" and used alongside "ORDER" and
+    "ORDRD", for tracking shipments. E.g., you might have a completed
+    note such as ``RECVD/SHIPD: UPS tracking number: XXXX``.
+
+- ``SPOKE``
+
+  - Awkwardly-named final state for a "SPIKE" backlog item (I know
+    it's a silly name, but can you think of a better name for a
+    finished "SPIKE" backlog item? (other than FIXED, of course).)
+
+- ``WAITD``
+
+  - The final state for "AWAIT", which are actionables that are delayed
+    until a later date or some external trigger. (E.g., ``WAITD/AWAIT:
+    Expect the president to call you back by Friday.``)
+
+(Note the previous list is ordered by usage count in the author's notes.
+For instance, I have 8,230 notes marked "FIXED", 2,744 notes marked
+"ANNUL", but only 146 notes marked "WAITD".)
 
 Suggesting FIVERs
 =================
