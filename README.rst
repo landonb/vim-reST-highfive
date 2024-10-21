@@ -80,7 +80,8 @@ Or you could use "REFER" to reference information outside your notes
 could type ``<gW>`` to open the URL under the cursor), e.g.,::
 
   REFER: Anduril 2 Manual:
-    http://toykeeper.net/torches/fsm/anduril2/anduril-manual.txt
+
+  http://toykeeper.net/torches/fsm/anduril2/anduril-manual.txt
 
 The uses are quite endless, and the vocabulary is essentially
 yours to create.
