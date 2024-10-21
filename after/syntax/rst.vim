@@ -290,7 +290,8 @@ function! s:HighFive_XXXXDs_SimplePast()
   "   :echo matchstr("{ANNUL}", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
   "
   let l:fiver_re = join(l:fivers, '\|')
-  let l:fiver_pat = '\%(^\|[[:space:]\n<\[({]\)\zs\%(' . l:fiver_re . '\)\%($\|[[:space:]\n.,/:>\])}]\)\@='
+  let l:fiver_pat =             '\%(^\|[[:space:]\n<\[({]\)\zs\%(' . l:fiver_re . 
+    \                                                                       '\)\%($\|[[:space:]\n.,/:>\])}]\)\@='
   let l:syn_cmd = "syn match FiverWordsXXXXDs '" . l:fiver_pat . "' contains=@NoSpell"
   exec l:syn_cmd
 
