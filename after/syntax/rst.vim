@@ -279,6 +279,8 @@ function! s:HighFive_XXXXDs_SimplePast()
   let l:fivers = add(l:fivers, 'SPOKE')
   let l:fivers = add(l:fivers, 'WAITD')
 
+  " Profiling: See comments near HighFive_FIVERs_Always_Hot's l:fiver_pat re: \zs vs. \@<=.
+  "
   " TRYME:
   "   :echo matchstr( "FIXED",  '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
   "   :echo matchstr(" ANNUL ", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
@@ -288,7 +290,6 @@ function! s:HighFive_XXXXDs_SimplePast()
   "   :echo matchstr("{ANNUL}", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
   "
   let l:fiver_re = join(l:fivers, '\|')
-  " Profiling: See comments near HighFive_FIVERs_Always_Hot's l:fiver_pat re: \zs vs. \@<=.
   let l:fiver_pat = '\%(^\|[[:space:]\n<\[({]\)\zs\%(' . l:fiver_re . '\)\%($\|[[:space:]\n.,/:>\])}]\)\@='
   let l:syn_cmd = "syn match FiverWordsXXXXDs '" . l:fiver_pat . "' contains=@NoSpell"
   exec l:syn_cmd
