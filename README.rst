@@ -82,7 +82,7 @@ could type ``<gW>`` to open the URL under the cursor), e.g.,::
   REFER: Anduril 2 Manual:
     http://toykeeper.net/torches/fsm/anduril2/anduril-manual.txt
 
-The uses are quite endlessly, and the vocabulary is essentially
+The uses are quite endless, and the vocabulary is essentially
 yours to create.
 
 How to highlight FIVERs
