@@ -112,6 +112,8 @@ function! s:HighFive_FIVERs_Always_Hot()
   "
   " - Though see the BWARE, below, re: performance.
 
+  " MAYBE: Generate this list from g: variables that user can set/override.
+
   let l:fivers = []
 
   " This is MAYBE the only always-highlighed FIVER where it's sometimes
@@ -276,6 +278,8 @@ endfunction
 function! s:HighFive_XXXXDs_SimplePast()
 
   " USAGE: Modify this list to your liking.
+
+  " MAYBE: Generate this list from g: variables that user can set/override.
 
   let l:fivers = []
 
