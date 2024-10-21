@@ -101,61 +101,71 @@ endfunction
 
 " +----------------------------------------------------------------------+
 
-" Second match: Proactively (always) highlight specific FIVER words.
-" - These are FIVER words that are always used in a FIVER context.
-" - Well, these are FIVER words that the author always uses in a FIVER
-"   context, i.e., these are conventional *actionable* words that I
-"   capitalize to make them pop in my notes documents, but that work
-"   without adding triggering punctuation (such as a slash or a colon).
+" Second match: Always highlight a few specific FIVER words.
+" - Keep this list brief, as it's not the speediest regex.
+" - 2024-10-20: I've also found after 5+ years using this plugin
+"   that highlighted standalone FIVERs are not that useful....
 
 function! s:HighFive_FIVERs_Always_Hot()
 
   " USAGE: Modify this list to your liking.
-
-  " NOTE: I include FIVERs in this list that I don't need unconditionally
-  "       highlighted (without trailing / or : punctuation), but that I
-  "       want to document nonetheless.
+  "
+  " - Though see the BWARE, below, re: performance.
 
   let l:fivers = []
 
-  " *** Most used action FIVERs ((lb): that the author uses)
-  "     that'll always be highlighted.
-  let l:fivers = add(l:fivers, 'FIXME')  " Want to do 'now'.
-  let l:fivers = add(l:fivers, 'LATER')  " Want to do ... eventually.
-  let l:fivers = add(l:fivers, 'MAYBE')  " Not sure if you want to do.
+  " This is MAYBE the only always-highlighed FIVER where it's sometimes
+  " useful as a means to catch your eye in the middle of a block of text
+  " (without explicitly needing to enable it, e.g., MAYBE/ or MAYBE:).
+  let l:fivers = add(l:fivers, 'MAYBE')
 
-  let l:fivers = add(l:fivers, 'SPIKE')  " Agile meaning (requires 1-2h investigation).
+  " Author uses this as a standalone reminder under a block of text
+  " in their receipts and shipment tracking file to enumerate when
+  " a bunch of packages are inbound, e.g.,
+  "   - AWAIT / AWAIT / AWAIT
+  " and then as they're received, they're marked complete, e.g.,
+  "   - AWAIT / AWAIT / RECVD/AWAIT
+  " which is about the only (super esoteric) reason for making this
+  " to be always-on.
+  let l:fivers = add(l:fivers, 'AWAIT')
 
-  let l:fivers = add(l:fivers, 'LEARN')  " Articles, books, technology you want to study.
-  let l:fivers = add(l:fivers, 'STUDY')  " Similar to LEARN (generally interchangeable).
-  let l:fivers = add(l:fivers, 'WATCH')  " Video to WATCH (not to be confused with TRACK).
+  " The list of always-on, super-hot FIVERs used to be much longer.
+  " - But 5+ years into using this plugin, I've audited my notes, and I
+  "   hardly appreciate the always-on feature.
+  " - I'll use MAYBE for emphasis. And I found a standalone use for AWAIT.
+  " - But the other FIVERs that were always-on that I've removed I didn't
+  "   find useful, like FIXME, LATER, SPIKE, LEARN, STUDY, WATCH, TRACK,
+  "   ORDER, CHORE, AUDIT, CHECK, REPLY, TRYME, etc.
+  "   - Because these are all actionable FIVERs, I'd only ever write them
+  "     as such, e.g., "LEARN: Study Rust", or "CHORE: Clean your room".
+  "   - There were also four non-actionables I had always on, but I never
+  "     used them, either: HRMMM, MEHHH, BONUS, and OOOPS. (Though you could
+  "     make an argument for OOOPS or OCRAP, perhaps, to draw your eye to
+  "     something in a block of text. But you can always **embolden** text,
+  "     because reST, though it won't be colorful. But still, I didn't
+  "     find these useful.)
+  "     MAYBE: You could add a new highlight feature, e.g., >COLOR-THIS<
+  "
+  " BWARE: Finally, this highlight has been known to be slow, at least in
+  " MacVim. I've sometimes seen selecting text with <Shift-Ctrl-Right> or
+  " <Shift-Ctrl-Left> then trying to <Ctrl-C> real quick fail comically,
+  " because the <Ctrl-C> would run before the selection got made. So you'd
+  " see Vim inject a literal '<D-c>' into the document and exit Insert mode
+  " (tho I never saw this in gVim on Linux Mint, just in MacVim). [Oh, note
+  " that I have a Hammerspoon script that translates <Ctrl-C> presses to
+  " <Cmd-C>, hence the '<D-c>'.] (And then if I disable this highlight, I
+  " wouldn't be able to reproduce the issue.) (It might have to do with the
+  " look-ahead to check if the FIVER is in a reST header, or maybe because
+  " the \| list of FIVERs was too long, who knows, doesn't seem worthwhile
+  " trying to investigate the performance of an already complicated regex
+  " match that has to run all the time for a few highlights that ultimately
+  " are not important! Also, now that this list is just 2 words, I haven't
+  " been able to reproduce the issue.
+  " - SAVVY: If you have performance issues with this highlight in the
+  "   future, just disable it — you're not losing much. It's probably the
+  "   least snazzy feature in this whole file.
 
-  let l:fivers = add(l:fivers, 'TRACK')  " Issue to keep an eye on (similar to SAVVY).
-  let l:fivers = add(l:fivers, 'AWAIT')  " Issue on hold until something else happens.
-
-  let l:fivers = add(l:fivers, 'ORDER')  " As in shopping (crap you want to buy).
-
-  let l:fivers = add(l:fivers, 'CHORE')  " Physical chore around the house/city.
-  "                            'ETASK'   " Digital chore you can do without thinking.
-  let l:fivers = add(l:fivers, 'AUDIT')  " Something you want to review.
-  let l:fivers = add(l:fivers, 'CHECK')  " Similar to AUDIT.
-  let l:fivers = add(l:fivers, 'REPLY')  " As in email or persons.
-  "                            'EMAIL'   " As in email.
-
-  " *** Less used action FIVERs.
-  "                            'TODAY'
-  "                            'DAILY'
-  "                            'RECUR'
-  let l:fivers = add(l:fivers, 'TRYME')
-  "                            'TWEAK'
-
-  " *** Not really actions...
-  let l:fivers = add(l:fivers, 'HRMMM')
-  let l:fivers = add(l:fivers, 'MEHHH')
-  let l:fivers = add(l:fivers, 'BONUS')
-  let l:fivers = add(l:fivers, 'OOOPS')
-
-  " *** EOL
+  " ***
 
   " Profiling: Vim docs suggest using \zs to start match, and not look-behind \@<=.
   " - I also tried similar with \ze to end match, replacing look-ahead \@=. But I do

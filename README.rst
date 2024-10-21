@@ -104,27 +104,18 @@ Always-highlighted FIVERs
 =========================
 
 Some FIVERs are always highlighted when used in a document, regardless
-of being punctuated. The list includes::
+of being followed by a forward slash or a colon. The list is limited to
+the following two FIVERs::
 
-  FIVER
-  LATER
   MAYBE
-  SPIKE
-  LEARN
-  STUDY
-  WATCH
-  TRACK
+
   AWAIT
-  ORDER
-  CHORE
-  AUDIT
-  CHECK
-  REPLY
-  TRYME
-  HRMMM
-  MEHHH
-  BONUS
-  OOOPS
+
+(This list used to include about 20 FIVERs, but this feature proved not
+to be that useful, and it can be a drag on performance. So the list has
+been pared to just those FIVERs that the author uses standalone. See
+inline comments for a discussion (especially re: this feature is not
+*that* useful).)
 
 Using FIVERs to mark tasks completed
 ====================================
