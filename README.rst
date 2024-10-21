@@ -97,7 +97,7 @@ E.g., just type "FIVER" followed by a colon, and it'll be highlighted::
   FIVER: The "FIVER" before the colon is highlighted.
 
 Additionally, any FIVER followed by a forward slash is also highlighted
-(because the author dates their notes), e.g.,::
+(because that's how the author dates their notes), e.g.::
 
   TRYME/2022-09-24 18:35: Try cooking Jackfruit Pulled "Pork".
 
@@ -113,8 +113,8 @@ the following two FIVERs::
   AWAIT
 
 (This list used to include about 20 FIVERs, but this feature proved not
-to be that useful, and it can be a drag on performance. So the list has
-been pared to just those FIVERs that the author uses standalone. See
+to be that useful, and it can be distracting when overused. So the list
+has been pared to just those FIVERs that the author uses standalone. See
 inline comments for a discussion (especially re: this feature is not
 *that* useful).)
 
