@@ -101,23 +101,6 @@ Additionally, any FIVER followed by a forward slash is also highlighted
 
   TRYME/2022-09-24 18:35: Try cooking Jackfruit Pulled "Pork".
 
-Always-highlighted FIVERs
-=========================
-
-Some FIVERs are always highlighted when used in a document, regardless
-of being followed by a forward slash or a colon. The list is limited to
-the following two FIVERs::
-
-  MAYBE
-
-  AWAIT
-
-(This list used to include about 20 FIVERs, but this feature proved not
-to be that useful, and it can be distracting when overused. So the list
-has been pared to just those FIVERs that the author uses standalone. See
-inline comments for a discussion (especially re: this feature is not
-*that* useful).)
-
 Using FIVERs to mark tasks completed
 ====================================
 
@@ -218,6 +201,23 @@ This following FIVERs are highlighted in purple with strikethrough:
 (Note the previous list is ordered by usage count in the author's notes.
 For instance, I have 8,230 notes marked "FIXED", 2,744 notes marked
 "ANNUL", but only 146 notes marked "WAITD".)
+
+Always-highlighted FIVERs
+=========================
+
+Some FIVERs are always highlighted when used in a document, regardless
+of being followed by a forward slash or a colon. The list is limited to
+the following two FIVERs::
+
+  MAYBE
+
+  AWAIT
+
+(This list used to include about 20 FIVERs, but this feature proved not
+to be that useful, and it can be distracting when overused. So the list
+has been pared to just those FIVERs that the author uses standalone. See
+inline comments for a discussion (especially re: this feature is not
+*that* useful).)
 
 Suggesting FIVERs
 =================
