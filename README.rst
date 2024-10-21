@@ -104,8 +104,8 @@ Additionally, any FIVER followed by a forward slash is also highlighted
 Using FIVERs to mark tasks completed
 ====================================
 
-When you're done with a task, you can change the FIVER to indicate that
-the task is completed, or you can prefix it with a completion FIVER.
+When you've completed a task, you can change the FIVER to indicate that
+the task is done, or you can prefix it with a completion FIVER.
 
 For instance, after completing a "FIXME" task, rename it "FIXED", e.g.::
 
@@ -118,23 +118,24 @@ the old FIVER will no longer be highlighted, e.g.::
 
   FIXED/FIXME: Send it
 
-will show "FIXED" in strikethrough, and will show "FIXME" unadorned.
+will show "FIXED" in strikethrough and will show "FIXME" unadorned.
 
 Which FIVER words signify completion
 ====================================
 
-Some five-letter uppercase words will be highlighted with a strikethrough.
+The following five-letter uppercase words will be highlighted with a
+strikethrough.
 
 For example, when a *FIXME* is *FIXED*, you can rename *FIXME* to *FIXED*.
-Then, instead of yellow and bold, the FIVER is now highlighted purple and
-stricken-through.
+Then, instead of yellow and bold, the FIVER is now highlighted purplish
+and stricken-through.
 
 Alternatively (and this is what the author prefers), you can prefix
 the old FIVER, e.g.::
 
   FIXED/FIXME: Some task
 
-Then the "FIXED" will be written in purplish strikethrough, the "FIXME"
+Then the "FIXED" will be written in purple strikethrough, the "FIXME"
 will no longer be highlighted, and you can easily scan the document for
 active FIVERs (which are highlighted in yellow or yellowish-green bold
 text), while preserving the original FIVER type.
@@ -190,13 +191,13 @@ This following FIVERs are highlighted in purple with strikethrough:
 
   - Awkwardly-named final state for a "SPIKE" backlog item (I know
     it's a silly name, but can you think of a better name for a
-    finished "SPIKE" backlog item? (other than FIXED, of course).)
+    finished "SPIKE" backlog item? (other than FIXED, of course!).)
 
 - ``WAITD``
 
   - The final state for "AWAIT", which are actionables that are delayed
-    until a later date or some external trigger. (E.g., ``WAITD/AWAIT:
-    Expect the president to call you back by Friday.``)
+    until a later date or some external trigger. (E.g.,
+    ``WAITD/AWAIT: Expect the president to call you back by Friday.``)
 
 (Note the previous list is ordered by usage count in the author's notes.
 For instance, I have 8,230 notes marked "FIXED", 2,744 notes marked
@@ -226,8 +227,11 @@ The author is more than willing to entertain new FIVER words, or changes
 to the dictionary setup by this plugin. But note that how anyone chooses
 to use this plugin is probably very specific to their own tastes. So you
 might just want to fork the plugin and tweak the dictionary to your liking.
+(Or we could move the predefined FIVERs to ``g:`` variables that you could
+customize from your own Vim script; feel free to PR such a change if you
+want.)
 
-But the author would still love to hear about how you use and how you've
+In any case, the author would love to hear about how you use and how you've
 personalized this plugin! (Indeed, if anyone likes this plugin, please
 give the project a star, I'd love to know that other devs enjoy it as
 much as I do. =)
