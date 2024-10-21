@@ -157,7 +157,6 @@ function! s:HighFive_FIVERs_Always_Hot()
 
   " *** EOL
 
-  let l:fiver_re = join(l:fivers, '\|')
   " Profiling: Vim docs suggest using \zs to start match, and not look-behind \@<=.
   " - I also tried similar with \ze to end match, replacing look-ahead \@=. But I do
   "   not see a change, FIVERsAlways_Hot still takes ~0.10 secs. on a ~10k line file.
@@ -204,6 +203,7 @@ function! s:HighFive_FIVERs_Always_Hot()
   "   :echo matchstr("[AWAIT/]",               '\%(^\|[[:space:]\n<\[({]\)\zs\%(AWAIT\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}$\)\@!')
   "   :echo matchstr("{AWAIT}",                '\%(^\|[[:space:]\n<\[({]\)\zs\%(AWAIT\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}$\)\@!')
   "
+  let l:fiver_re = join(l:fivers, '\|')
   let l:fiver_pat =                            '\%(^\|[[:space:]\n<\[({]\)\zs\%(' . l:fiver_re . 
     \                                                                               '\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}$\)\@!'
   let l:syn_cmd = "syn match FIVERsAlways_Hot '" . l:fiver_pat . "' contains=@NoSpell"
