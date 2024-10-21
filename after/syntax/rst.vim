@@ -282,16 +282,16 @@ function! s:HighFive_XXXXDs_SimplePast()
   " Profiling: See comments near HighFive_FIVERs_Always_Hot's l:fiver_pat re: \zs vs. \@<=.
   "
   " TRYME:
-  "   :echo matchstr( "FIXED",  '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
-  "   :echo matchstr(" ANNUL ", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
-  "   :echo matchstr("<FIXED>", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
-  "   :echo matchstr("(ANNUL)", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
-  "   :echo matchstr("[FIXED]", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
-  "   :echo matchstr("{ANNUL}", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=')
+  "   :echo matchstr( "FIXED",  '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr(" ANNUL ", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("<FIXED>", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("(ANNUL)", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("[FIXED]", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("{ANNUL}", '\%(^\|[[:space:]\n<\[({]\)\zs\%(FIXED\|ANNUL\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
   "
   let l:fiver_re = join(l:fivers, '\|')
   let l:fiver_pat =             '\%(^\|[[:space:]\n<\[({]\)\zs\%(' . l:fiver_re . 
-    \                                                                       '\)\%($\|[[:space:]\n.,/:>\])}]\)\@='
+    \                                                                       '\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!'
   let l:syn_cmd = "syn match FiverWordsXXXXDs '" . l:fiver_pat . "' contains=@NoSpell"
   exec l:syn_cmd
 
