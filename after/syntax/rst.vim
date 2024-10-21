@@ -25,9 +25,9 @@
 " +======================================================================+
 " +======================================================================+
 
-" HINT: You can `hi clear {group-name}` and `hi def...` in a reST file to live-test.
-"       But for `syn clear ...` and `syn match ...` you need to `:e` reload the file
-"       (or `do Syntax`/`doautocmd Syntax` (`syntax sync fromstart` did not work FM)).
+" SAVVY: You can `hi clear {group-name}` and `hi def...` in a reST file to live-test.
+"        But for `syn clear ...` and `syn match ...` you need to `:e` reload the file
+"        (or `do Syntax`/`doautocmd Syntax` (`syntax sync fromstart` did not work FM)).
 
 " +======================================================================+
 " +======================================================================+
@@ -53,7 +53,7 @@
 "     - 'FIVER/2021-01-19 00:08: Some note'.
 "     - 'FIVER: Some other note`.
 
-" Ref:
+" REFER:
 "   :h /character-classes
 "   :h gui-colors
 function! s:HighFive_FIVERs_Punctuated()
@@ -110,7 +110,7 @@ endfunction
 
 function! s:HighFive_FIVERs_Always_Hot()
 
-  " YOU: Modify this list to your liking.
+  " USAGE: Modify this list to your liking.
 
   " NOTE: I include FIVERs in this list that I don't need unconditionally
   "       highlighted (without trailing / or : punctuation), but that I
@@ -299,7 +299,7 @@ endfunction
 " +======================================================================+
 " +======================================================================+
 
-" HINT: If syntax highlighting appears disabled, even if the file has
+" SAVVY: If syntax highlighting appears disabled, even if the file has
 " a Vim mode line saying otherwise, trying closing and reopening the
 " file, or saving the file and running the `:e` command, or try this:
 "
@@ -320,8 +320,8 @@ endfunction
 "
 " - tl;dr I'd rather this work on new files and without requiring modeline.
 "
-" YOU: To opt-out, set redrawtimeout (rdt) to something less than 4999
-"      but not 2000 (the default).
+" USAGE: To opt-out, set redrawtimeout (rdt) to something less than 4999
+"        but not 2000 (the default).
 "
 "      - E.g., to disable these highlights (and their associated
 "        computational overhead), add a modeline like this atop
