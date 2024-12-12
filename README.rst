@@ -75,8 +75,8 @@ Other uses include documenting interesting information, such as using
   SAVVY: Search Gmail by date: `after:YYYY/MM/DD before:YYYY/MM/DD`
 
 Or you could use "REFER" to reference information outside your notes
-(and maybe you've got the `dubs_web_hatch
-<https://github.com/landonb/dubs_web_hatch>`__ plugin installed, so you
+(and maybe you've got the `vim-web-hatch
+<https://github.com/embrace-vim/vim-web-hatch>`__ plugin installed, so you
 could type ``<gW>`` to open the URL under the cursor), e.g.,::
 
   REFER: Anduril 2 Manual:

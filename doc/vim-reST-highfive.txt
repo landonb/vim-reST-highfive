@@ -57,6 +57,8 @@ could type <gW> to open the URL under the cursor), e.g.,: >
 The uses are quite endlessly, and the vocabulary is essentially
 yours to create.
 
+- REFER: https://github.com/embrace-vim/vim-web-hatch#🐣
+
 How to highlight FIVERs
 -----------------------
 
