@@ -369,6 +369,13 @@ function! s:reST_highfive_Wire_Highlights()
   "        logic: skip special highlights if rdt <= 4999 but not 2000.
   let l:syntaxEnableIfGreater = 4999
 
+  " SAVVY/2024-12-17: In case another plugin turns off case matching,
+  " ensure it's set appropriately.
+  " - For instance, https://github.com/habamax/vim-rst calls
+  "   `syn case ignore` but doesn't reset it, in which case the FIVERs
+  "   defined above will match loosely (e.g., 'Fiver' would match).
+  let l:restore_case = execute('syntax case match')
+
   if (l:redrawtimeout == l:defaultRedrawTimeout)
      \ || (l:redrawtimeout > l:syntaxEnableIfGreater)
     call s:HighFive_FIVERs_Punctuated()
@@ -381,6 +388,8 @@ function! s:reST_highfive_Wire_Highlights()
     silent! syn clear rstInlineInternalTargets
     silent! syn clear rstSubstitutionReference
   endif
+
+  execute l:restore_case
 endfunction
 
 " +----------------------------------------------------------------------+
