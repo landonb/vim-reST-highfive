@@ -48,7 +48,7 @@ Other uses include documenting interesting information, such as using
   SAVVY: Search Gmail by date: `after:YYYY/MM/DD before:YYYY/MM/DD`
 <
 Or you could use "REFER" to reference information outside your notes
-(and maybe you've got the *dubs_web_hatch* plugin installed, so you
+(and maybe you've got the *vim-webopen* plugin installed, so you
 could type |gW| to open the URL under the cursor), e.g.,: >
 
   REFER: Anduril 2 Manual:
@@ -57,7 +57,7 @@ could type |gW| to open the URL under the cursor), e.g.,: >
 The uses are quite endlessly, and the vocabulary is essentially
 yours to create.
 
-- REFER: https://github.com/embrace-vim/vim-web-hatch#🐣
+- REFER: https://github.com/embrace-vim/vim-webopen#🐣
 
 How to highlight FIVERs
 -----------------------
