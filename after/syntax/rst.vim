@@ -374,6 +374,7 @@ function! s:reST_highfive_Wire_Highlights()
   " - For instance, https://github.com/habamax/vim-rst calls
   "   `syn case ignore` but doesn't reset it, in which case the FIVERs
   "   defined above will match loosely (e.g., 'Fiver' would match).
+  " - ALTLY: Add \C to start of every regexp pattern.
   let l:restore_case = execute('syntax case match')
 
   if (l:redrawtimeout == l:defaultRedrawTimeout)
