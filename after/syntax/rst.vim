@@ -1,8 +1,8 @@
-" Highlight FIVER words in your notes.
-" Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
+" vim:tw=0:ts=2:sw=2:et:norl:
+" Author: Landon Bouma <https://tallybark.com/>
 " Project: https://github.com/landonb/vim-reST-highfive#🖐
 " License: GPLv3
-"  vim:tw=0:ts=2:sw=2:et:norl:
+" Summary: Highlight FIVER words in your notes.
 
 " +----------------------------------------------------------------------+
 
