@@ -306,10 +306,10 @@ function! s:HighFive_XXXXDs_SimplePast()
   let l:fiver_re = join(l:fivers, '\|')
   let l:fiver_pat =             '\%(^\|[[:space:]\n<\[({]\)\zs\%(' . l:fiver_re . 
     \                                                                       '\)\%($\|[[:space:]\n.,/:>\])}]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!'
-  let l:syn_cmd = "syn match FiverWordsXXXXDs '" . l:fiver_pat . "' contains=@NoSpell"
+  let l:syn_cmd = "syn match FIVERWordsXXXXDs '" . l:fiver_pat . "' contains=@NoSpell"
   exec l:syn_cmd
 
-  hi def FiverWordsXXXXDs guifg=Purple gui=strikethrough cterm=strikethrough
+  hi def FIVERWordsXXXXDs guifg=Purple gui=strikethrough cterm=strikethrough
 endfunction
 
 " +======================================================================+
