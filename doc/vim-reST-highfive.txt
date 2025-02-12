@@ -1,6 +1,6 @@
 *vim-reST-highfive.txt*	For Vim version 7.4.	Last change: 2022 Sep 24
 
-reST Document FIVER Highlighting~
+reST Document FIVER Highlighting 🖐 ~
 
 RESTRUCTUREDTEXT FIVER HIGHLIGHTER		*vim-reST-highfive*
 
