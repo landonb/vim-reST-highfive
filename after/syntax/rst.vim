@@ -95,7 +95,7 @@ function! s:HighFive_FIVERs_No_Allnums()
 
   " COPYD: Default to Dubs After Dark 'Normal' highlight:
   "          highlight Normal ctermfg=15 guifg=White guibg=#060606
-  " - CXREF: ~/.kit/nvim/landonb/start/dubs_after_dark/colors/after-dark.vim:106
+  " - CXREF: ~/.kit/nvim/landonb/dubs_after_dark/colors/after-dark.vim:106
   hi def FIVERsPunctuatedNoAllnums ctermfg=15 guifg=White cterm=NONE
 endfunction
 
@@ -200,7 +200,7 @@ function! s:HighFive_FIVERs_Always_Hot()
   "     block:
   "      [=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]
   "    from rstSections in
-  "      ~/.kit/nvim/landonb/start/vim-reSTfold/after/syntax/rst.vim:131
+  "      ~/.kit/nvim/landonb/vim-reSTfold/after/syntax/rst.vim:131
   "    and used here to avoid stealing rstSections highlight.
   "    - PROFILING: But at what cost?
   "
