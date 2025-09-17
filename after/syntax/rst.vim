@@ -52,6 +52,11 @@
 "     to emphasize, e.g.,
 "     - 'FIVER/2021-01-19 00:08: Some note'.
 "     - 'FIVER: Some other note`.
+"
+" FEATR/2025-09-16: Now with limited punctuation, e.g., WTF?!: or
+" WOW!!/ or AC/DC or A-OK!:
+" - But exclude colon, or clock time is highlighted, e.g., 12:34:
+"   so not using [:punct:] but being selective instead.
 
 " REFER:
 "   :h /character-classes
@@ -61,22 +66,27 @@ function! s:HighFive_FIVERs_Punctuated()
   " by using elaborate rstSections check, including for reSTfold delimiters:
   "   [=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]
   "
-  " TRYME:
-  "   :echo matchstr("FIVER: You bet!\n####@",  '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
-  "   :echo matchstr("FIVER: You wish!\n@@@@@", '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
-  "   :echo matchstr( "FIVER:",                 '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
-  "   :echo matchstr( "FIVER/",                 '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
-  "   :echo matchstr("<FIVER:>",                '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
-  "   :echo matchstr("(FIVER/)",                '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
-  "   :echo matchstr("[FIVER:]",                '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
-  "   :echo matchstr("{FIVER/}",                '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  " TRYME: [SAVVY: You might need to `NoiceDisable`, otherwise these don't always echo]:
+  "   :echo matchstr("FIVER: You bet!\n####@",  '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]\\/!?-]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   # This simulates a reSTfold header, so not highlighted:
+  "   :echo matchstr("FIVER: You wish!\n@@@@@", '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]\\/!?-]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr( "FIVER:",                 '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]\\/!?-]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr( "FIVER/",                 '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]\\/!?-]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("<FIVER:>",                '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]\\/!?-]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("(FIVER/)",                '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]\\/!?-]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("[FIVER:]",                '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]\\/!?-]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("{FIVER/}",                '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]\\/!?-]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr(" NOPE!  ",                '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]\\/!?-]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr(" FIVE!:",                 '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]\\/!?-]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr(" AC/DC:",                 '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]\\/!?-]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr(" AB\\AC:",                '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]\\/!?-]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
   "   # I do not remember why I had this use case, so removed it:
-  "   :echo matchstr("#FIVER: support removed", '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("#FIVER: support removed", '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]\\/!?-]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
   "
-  syn match FIVERsPunctuated                    '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!' contains=@NoSpell
-  "                                                                                    Followed by a slash ^
-  "                                                                                          ... or a colon ^
-  "                                           Not followed by rstSections reSTfold header indicator (on following line) ^ \(..............................................................\)\@!
+  syn match FIVERsPunctuated                    '\%(^\|[[:space:]\n<\[({]\)\zs[_[:upper:][:digit:]\\/!?-]\{5}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!' contains=@NoSpell
+  "                                                                                          Followed by a slash ^
+  "                                                                                                ... or a colon ^
+  "                                                 Not followed by rstSections reSTfold header indicator (on following line) ^ \(..............................................................\)\@!
 
   " Not as bright a yellow, to be less noticeable than FIVERsAlways_Hot.
   hi def FIVERsPunctuated guifg=#caf751 gui=bold cterm=bold
