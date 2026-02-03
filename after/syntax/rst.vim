@@ -2,7 +2,7 @@
 " Author: Landon Bouma <https://tallybark.com/>
 " Project: https://github.com/landonb/vim-reST-highfive#🖐
 " License: GPLv3
-" Summary: Highlight FIVER words in your notes.
+" Summary: Highlight FIVER words in your notes. #FIVERs #WORDS
 
 " +----------------------------------------------------------------------+
 
