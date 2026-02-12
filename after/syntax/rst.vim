@@ -389,9 +389,9 @@ function! s:reST_highfive_Wire_Highlights()
 
   if (l:redrawtimeout == l:defaultRedrawTimeout)
      \ || (l:redrawtimeout > l:syntaxEnableIfGreater)
-    call s:HighFive_FIVERs_Punctuated()
     call s:HighFive_FIVERs_No_Allnums()
     call s:HighFive_FIVERs_Always_Hot()
+    call s:HighFive_FIVERs_Punctuated()
     call s:HighFive_XXXXDs_SimplePast()
   else
     silent! syn clear rstCitationReference
