@@ -259,6 +259,40 @@ endfunction
 " - Issue opened April, 2020, but no traction since?
 "   https://github.com/macvim-dev/macvim/issues/1034
 
+" +----------------------------------------------------------------------+
+
+function! s:HighFive_FIVERs_Actionable()
+
+  let l:fivers = []
+
+  let l:fivers = add(l:fivers, 'FIXME')
+  let l:fivers = add(l:fivers, 'SPIKE')
+  " let l:fivers = add(l:fivers, 'FTREQ')
+
+  " TRYME: (SAVVY: Run `NoiceDisable` first, otherwise duplicate messages not necessarily displayed):
+  "   :echo matchstr("A normal SPIKE",          '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPIKE\|FTREQ\)\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("SPIKE nope nope\n@@@@@",  '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPIKE\|FTREQ\)\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr( "SPIKE",                  '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPIKE\|FTREQ\)\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr( "SPIKE/",                 '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPIKE\|FTREQ\)\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr( "SPIKE:",                 '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPIKE\|FTREQ\)\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("<SPIKE>",                 '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPIKE\|FTREQ\)\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("(SPIKE:)",                '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPIKE\|FTREQ\)\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("[SPIKE/]",                '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPIKE\|FTREQ\)\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+  "   :echo matchstr("{SPIKE}",                 '\%(^\|[[:space:]\n<\[({]\)\zs\%(SPIKE\|FTREQ\)\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!')
+
+  " USYNC: Similar regex as FIVERsPunctuated.
+  let l:fiver_re = join(l:fivers, '\|')
+  let l:fiver_pat =                             '\%(^\|[[:space:]\n<\[({]\)\zs\%(' . l:fiver_re . 
+    \                                                                               '\)\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!'
+  "                                                                    Followed by a slash ^
+  "                                                                          ... or a colon ^
+  "                           Not followed by rstSections reSTfold header indicator (on following line) ^ \(..............................................................\)\@!
+  let l:syn_cmd = "syn match FIVERsActionable '" . l:fiver_pat . "' contains=@NoSpell"
+  exec l:syn_cmd
+
+  hi def FIVERsActionable guifg=Yellow gui=bold cterm=bold
+endfunction
+
 " +======================================================================+
 " +======================================================================+
 
@@ -392,6 +426,7 @@ function! s:reST_highfive_Wire_Highlights()
     call s:HighFive_FIVERs_No_Allnums()
     call s:HighFive_FIVERs_Always_Hot()
     call s:HighFive_FIVERs_Punctuated()
+    call s:HighFive_FIVERs_Actionable()
     call s:HighFive_XXXXDs_SimplePast()
   else
     silent! syn clear rstCitationReference
