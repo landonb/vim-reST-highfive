@@ -109,6 +109,27 @@ function! s:HighFive_FIVERs_No_Allnums()
   hi def FIVERsPunctuatedNoAllnums ctermfg=15 guifg=White cterm=NONE
 endfunction
 
+" ***
+
+function! s:HighFive_Fivers_Punctuated()
+  " USYNC: Similar to FIVERsPunctuated:
+  " - Change:
+  "                [_[:upper:][:digit:]\\/!?-]\{5}
+  "   to:
+  "     [[:upper:]][_[:lower:][:digit:]\\/!?-]\{4}
+  " - Savvy: Cannot use same name but diff. case,
+  "          i.e., cannot name: FiversPunctuated,
+  "          which conflicts w/ FIVERsPunctuated.
+  "  - Otherwise, anything matching this regex
+  "    would be match `hi def FIVERsPunctuated`
+  "    (and be bolded and colorized & not just
+  "     spellcheck-freed).
+  syn match FiversNoSpelling                    '\%(^\|[[:space:]\n<\[({]\)\zs[[:upper:]][_[:lower:][:digit:]\\/!?-]\{4}\%([/:]\)\@=\%(.*\n\([=`:.'."'".'"~^_*+#!@$%&()[\]{}<>/\\|,;?-]\)\1\{4,\}\%($\|\n\)\)\@!' contains=@NoSpell
+
+  " Note there's no highlight def'n; the @NoSpell goes in the syn-match.
+  "   hi def FiversNoSpelling guifg=#abc123 gui=bold cterm=bold
+endfunction
+
 " +----------------------------------------------------------------------+
 
 " Second match: Always highlight a few specific FIVER words.
@@ -426,6 +447,7 @@ function! s:reST_highfive_Wire_Highlights()
     call s:HighFive_FIVERs_No_Allnums()
     call s:HighFive_FIVERs_Always_Hot()
     call s:HighFive_FIVERs_Punctuated()
+    call s:HighFive_Fivers_Punctuated()
     call s:HighFive_FIVERs_Actionable()
     call s:HighFive_XXXXDs_SimplePast()
   else
