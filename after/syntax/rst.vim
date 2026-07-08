@@ -374,7 +374,9 @@ function! s:HighFive_XXXXDs_SimplePast()
   let l:syn_cmd = "syn match FIVERWordsXXXXDs '" . l:fiver_pat . "' contains=@NoSpell"
   exec l:syn_cmd
 
-  hi def FIVERWordsXXXXDs guifg=Purple gui=strikethrough cterm=strikethrough
+  " PREVY: Purple (#800080) is a little too dark to read [or maybe my eyes are old]:
+  "  hi def FIVERWordsXXXXDs guifg=Purple gui=strikethrough cterm=strikethrough
+  hi def FIVERWordsXXXXDs guifg=#bf00bf gui=strikethrough cterm=strikethrough
 endfunction
 
 " +======================================================================+
